@@ -1,0 +1,58 @@
+.container {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.nestedContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.itemStyle {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+.item {
+  display: inline-block;
+}
+
+.child {
+  display: inline-block;
+  margin-right: 20px;
+  margin-top: 30px;
+}
+
+.small {
+  display: inline-block;
+  width: auto;
+  background-color: #777;
+  font-size: 14px;
+}
+
+.headerContainer {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  justify-content: space-between;
+}
+
+.header {
+  color: #f17070;
+  text-align: left;
+  padding-left: 20px;
+  font-weight: bold;
+  font-size: 40px;
+}
+
+.submitButton {
+  width: 150px;
+  display: inline-block;
+  margin-right: 20px;
+  margin-top: 30px;
+}

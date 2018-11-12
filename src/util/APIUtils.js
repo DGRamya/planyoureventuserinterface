@@ -69,6 +69,7 @@ export function getMyEvents(){
 }
 
 export function deleteEvent(deleteRequest) {
+  console.log(" deleteRequest :: " + deleteRequest);
   return request({
     url: API_BASE_URL + "/events/myevents/delete",
     method: "POST",

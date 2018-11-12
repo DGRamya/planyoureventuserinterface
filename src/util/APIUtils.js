@@ -60,3 +60,19 @@ export function createEvent(eventRequest) {
     body: JSON.stringify(eventRequest)
   });
 }
+
+export function getMyEvents(){
+  return request({
+    url: API_BASE_URL + "/events/myevents/",
+    method: "GET"
+  });
+}
+
+export function deleteEvent(deleteRequest) {
+  console.log(" deleteRequest :: " + deleteRequest);
+  return request({
+    url: API_BASE_URL + "/events/myevents/delete",
+    method: "POST",
+    body: JSON.stringify(deleteRequest)
+  });
+}

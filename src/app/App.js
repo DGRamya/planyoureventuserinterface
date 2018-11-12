@@ -16,7 +16,7 @@ import Alert from "react-s-alert";
 import "react-s-alert/dist/s-alert-default.css";
 import "react-s-alert/dist/s-alert-css-effects/slide.css";
 import "./App.css";
-
+import MyEvents from "../event/MyEvents";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -90,6 +90,12 @@ class App extends Component {
               authenticated={this.state.authenticated}
               currentUser={this.state.currentUser}
               component={Event}
+            />
+            <PrivateRoute
+              path="/myevents"
+              authenticated={this.state.authenticated}
+              currentUser={this.state.currentUser}
+              component={MyEvents}
             />
             <Route
               path="/login"

@@ -14,6 +14,7 @@ class AppHeader extends Component {
           </div>
           <div className="app-options">
             <nav className="app-nav">
+
               {this.props.authenticated ? (
                 <ul>
                   <li>
@@ -21,6 +22,12 @@ class AppHeader extends Component {
                   </li>
                   <li>
                     <a onClick={this.props.onLogout}>Logout</a>
+                  </li>
+                  <li>
+                    <NavLink to="/event">Create Event</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/myevents">My Events</NavLink>
                   </li>
                 </ul>
               ) : (
@@ -33,6 +40,7 @@ class AppHeader extends Component {
                   </li>
                 </ul>
               )}
+
             </nav>
           </div>
         </div>

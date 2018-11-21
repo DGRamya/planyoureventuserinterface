@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-//import DayPickerInput from "react-day-picker/DayPickerInput";
+import DayPickerInput from "react-day-picker/DayPickerInput";
 import axios from "axios";
-//import "react-day-picker/lib/style.css";
+import "react-day-picker/lib/style.css";
 import "./Event.css";
 import { API_BASE_URL, ACCESS_TOKEN } from "../constants";
 import { createEvent } from "../util/APIUtils";
@@ -15,8 +15,6 @@ class Event extends Component {
       eventname: "",
       eventvenue: "",
       eventDate: "",
-      todolist: [""],
-      guestlist: [""]
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,6 +23,7 @@ class Event extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+  
     const eventDetails = {};
     for (const field in this.refs) {
       eventDetails[field] = this.refs[field].value;
@@ -34,8 +33,7 @@ class Event extends Component {
 
     eventData["eventName"] = eventDetails["eventname"];
     eventData["venue"] = eventDetails["eventvenue"];
-    eventData["todoList"] = this.state.todolist;
-    eventData["invitationList"] = this.state.guestlist;
+    eventData["eventDate"] = this.state.eventDate;
 
     console.log("printing the event data" + JSON.stringify(eventData));
 
@@ -70,47 +68,12 @@ class Event extends Component {
     event.target.reset();
   };
 
-  handleDateChange(date) {
+  handleDateChange(day) {
+    alert("handle"+day);
     this.setState({
-      eventDate: date
+      eventDate: day
     });
   }
-
-  handleToDoListChange = idx => evt => {
-    const newList = this.state.todolist;
-    newList[idx] = evt.target.value;
-    this.setState({ todolist: newList });
-  };
-
-  handleAddToDoList = () => {
-    this.setState({
-      todolist: this.state.todolist.concat([""])
-    });
-  };
-
-  handleRemoveToDoList = idx => () => {
-    this.setState({
-      todolist: this.state.todolist.filter((s, sidx) => idx !== sidx)
-    });
-  };
-
-  handleGuestChange = idx => evt => {
-    const newList = this.state.guestlist;
-    newList[idx] = evt.target.value;
-    this.setState({ guestlist: newList });
-  };
-
-  handleAddGuest = () => {
-    this.setState({
-      guestlist: this.state.guestlist.concat([""])
-    });
-  };
-
-  handleRemoveGuest = idx => () => {
-    this.setState({
-      guestlist: this.state.guestlist.filter((s, sidx) => idx !== sidx)
-    });
-  };
 
   render() {
     const { selectedDay } = this.state;
@@ -141,96 +104,12 @@ class Event extends Component {
             </div>
           </div>
 
-          {/* <div className="container">
+          <div className="container">
             <div className="child">
               <label>Date</label>
             </div>
             <div className="child">
               <DayPickerInput onDayChange={this.handleDateChange} />
-            </div>
-          </div> */}
-
-          <div className="container">
-            <div className="child">
-              <label>To Do List</label>
-            </div>
-          </div>
-          <div className="container">
-            <div className="nestedContainer">
-              {this.state.todolist.map((todo, idx) => (
-                <div className="itemStyle">
-                  <div className="item">
-                    <input
-                      type="text"
-                      placeholder={`TodoList #${idx + 1} name`}
-                      value={todo}
-                      onChange={this.handleToDoListChange(idx)}
-                    />
-                  </div>
-                  <div>
-                    <button
-                      type="button"
-                      onClick={this.handleRemoveToDoList(idx)}
-                      className="small"
-                    >
-                      -
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="container">
-            <div className="child">
-              <button
-                type="button"
-                onClick={this.handleAddToDoList}
-                className="small"
-              >
-                Add Item
-              </button>
-            </div>
-          </div>
-
-          <div className="container">
-            <div className="child">
-              <label>Guest List</label>
-            </div>
-          </div>
-          <div className="container">
-            <div className="nestedContainer">
-              {this.state.guestlist.map((guest, idx) => (
-                <div className="itemStyle">
-                  <div className="item">
-                    <input
-                      type="text"
-                      placeholder={`GuestList #${idx + 1} name`}
-                      value={guest}
-                      onChange={this.handleGuestChange(idx)}
-                    />
-                  </div>
-                  <div>
-                    <button
-                      type="button"
-                      onClick={this.handleRemoveGuest(idx)}
-                      className="small"
-                    >
-                      -
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="container">
-            <div className="child">
-              <button
-                type="button"
-                onClick={this.handleAddGuest}
-                className="small"
-              >
-                Add Guest
-              </button>
             </div>
           </div>
 

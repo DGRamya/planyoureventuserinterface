@@ -29,6 +29,9 @@ class AppHeader extends Component {
                   <li>
                     <NavLink to="/myevents">My Events</NavLink>
                   </li>
+                  <li>
+                    <NavLink to="/shoppingList">Shopping List</NavLink>
+                  </li>
                 </ul>
               ) : (
                 <ul>

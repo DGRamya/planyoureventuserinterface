@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
+import { IndexRoute } from "react-router";
 import AppHeader from "../common/AppHeader";
 import Home from "../home/Home";
 import Login from "../user/login/Login";
@@ -12,11 +13,18 @@ import { getCurrentUser } from "../util/APIUtils";
 import { ACCESS_TOKEN } from "../constants";
 import PrivateRoute from "../common/PrivateRoute";
 import Event from "../event/Event";
+import EventDetails from "../event/EventDetails";
+import EventDisplay from "../event/EventDisplay";
+import ShoppingList from "../event/ShoppingList";
+import PermanentDrawerLeft from "../event/PermanentDrawerLeft";
+import Sidebar from "../event/Sidebar";
+
 import Alert from "react-s-alert";
 import "react-s-alert/dist/s-alert-default.css";
 import "react-s-alert/dist/s-alert-css-effects/slide.css";
 import "./App.css";
 import MyEvents from "../event/MyEvents";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -97,6 +105,16 @@ class App extends Component {
               currentUser={this.state.currentUser}
               component={MyEvents}
             />
+
+            <PrivateRoute path="/eventdetails"  
+                          authenticated={this.state.authenticated}
+                          currentUser={this.state.currentUser}
+                          component={EventDetails} />
+
+            <Route path="/shoppinglist:itemname"  
+                   component={ShoppingList}
+                  /> 
+             
             <Route
               path="/login"
               render={props => (
@@ -111,6 +129,7 @@ class App extends Component {
             />
             <Route path="/oauth2/redirect" component={OAuth2RedirectHandler} />
             <Route component={NotFound} />
+
           </Switch>
         </div>
         <Alert

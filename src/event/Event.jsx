@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-//import DayPickerInput from "react-day-picker/DayPickerInput";
 import axios from "axios";
-//import "react-day-picker/lib/style.css";
 import "./Event.css";
 import { API_BASE_URL, ACCESS_TOKEN } from "../constants";
 import { createEvent } from "../util/APIUtils";
@@ -38,25 +36,6 @@ class Event extends Component {
     eventData["invitationList"] = this.state.guestlist;
 
     console.log("printing the event data" + JSON.stringify(eventData));
-
-    // axios
-    //   .post("https://localhost:8080/events/myevents/create", eventData, {
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       "Access-Control-Allow-Origin": "*",
-    //       Authorization: "Bearer " + localStorage.getItem(ACCESS_TOKEN),
-    //       crossDomain: true
-    //     }
-    //   })
-    //   .then(function(res) {
-    //     console.log(res);
-    //     alert("Event Added successful!");
-    //   })
-    //   .catch(function(err) {
-    //     alert("Error in Event creation!");
-    //     console.log(err);
-    //   });
-
     const eventRequest = Object.assign({}, eventData);
 
     createEvent(eventRequest)
@@ -140,16 +119,6 @@ class Event extends Component {
               <input type="text" required ref="eventvenue" />
             </div>
           </div>
-
-          {/* <div className="container">
-            <div className="child">
-              <label>Date</label>
-            </div>
-            <div className="child">
-              <DayPickerInput onDayChange={this.handleDateChange} />
-            </div>
-          </div> */}
-
           <div className="container">
             <div className="child">
               <label>To Do List</label>

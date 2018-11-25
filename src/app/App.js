@@ -8,6 +8,7 @@ import Profile from "../user/profile/Profile";
 import OAuth2RedirectHandler from "../user/oauth2/OAuth2RedirectHandler";
 import NotFound from "../common/NotFound";
 import LoadingIndicator from "../common/LoadingIndicator";
+import ShoppingList from "../shoppingList/ShoppingList";
 import { getCurrentUser } from "../util/APIUtils";
 import { ACCESS_TOKEN } from "../constants";
 import PrivateRoute from "../common/PrivateRoute";
@@ -96,6 +97,12 @@ class App extends Component {
               authenticated={this.state.authenticated}
               currentUser={this.state.currentUser}
               component={MyEvents}
+            />
+            <PrivateRoute
+              path="/shoppingList"
+              authenticated={this.state.authenticated}
+              currentUser={this.state.currentUser}
+              component={ShoppingList}
             />
             <Route
               path="/login"

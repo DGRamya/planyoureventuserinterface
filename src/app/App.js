@@ -14,9 +14,7 @@ import { ACCESS_TOKEN } from "../constants";
 import PrivateRoute from "../common/PrivateRoute";
 import Event from "../event/Event";
 import EventDetails from "../event/EventDetails";
-import EventDisplay from "../event/EventDisplay";
 import ShoppingList from "../event/ShoppingList";
-import PermanentDrawerLeft from "../event/PermanentDrawerLeft";
 import Sidebar from "../event/Sidebar";
 
 import Alert from "react-s-alert";

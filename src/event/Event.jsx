@@ -36,25 +36,6 @@ class Event extends Component {
     eventData["eventDate"] = this.state.eventDate;
 
     console.log("printing the event data" + JSON.stringify(eventData));
-
-    // axios
-    //   .post("https://localhost:8080/events/myevents/create", eventData, {
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //       "Access-Control-Allow-Origin": "*",
-    //       Authorization: "Bearer " + localStorage.getItem(ACCESS_TOKEN),
-    //       crossDomain: true
-    //     }
-    //   })
-    //   .then(function(res) {
-    //     console.log(res);
-    //     alert("Event Added successful!");
-    //   })
-    //   .catch(function(err) {
-    //     alert("Error in Event creation!");
-    //     console.log(err);
-    //   });
-
     const eventRequest = Object.assign({}, eventData);
 
     createEvent(eventRequest)

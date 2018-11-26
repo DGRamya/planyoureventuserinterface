@@ -1,0 +1,21 @@
+
+  .root{
+    display: inline-flex;
+    background-color: white;
+    margin-left: 100px;
+    flex-direction: column;
+  }
+
+  .childitem{
+    display: inline-block;
+    color: #f17070;
+  }
+
+  .title{
+    font-weight: bold;
+    font-size: 40px;
+  }
+
+  .content{
+    font-size: 20px
+  }

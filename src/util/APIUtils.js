@@ -68,6 +68,13 @@ export function getMyEvents(){
   });
 }
 
+export function getEventDetails(){
+  return request({
+    url: API_BASE_URL + "/events/myevents/eventdetails/${eventId}",
+    method: "GET"
+  });
+}
+
 export function deleteEvent(deleteRequest) {
   console.log(" deleteRequest :: " + deleteRequest);
   return request({

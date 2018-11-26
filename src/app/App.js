@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
+import { IndexRoute } from "react-router";
 import AppHeader from "../common/AppHeader";
 import Home from "../home/Home";
 import Login from "../user/login/Login";
@@ -13,11 +14,15 @@ import { getCurrentUser } from "../util/APIUtils";
 import { ACCESS_TOKEN } from "../constants";
 import PrivateRoute from "../common/PrivateRoute";
 import Event from "../event/Event";
+import EventDetails from "../event/EventDetails";
+import Sidebar from "../event/Sidebar";
+
 import Alert from "react-s-alert";
 import "react-s-alert/dist/s-alert-default.css";
 import "react-s-alert/dist/s-alert-css-effects/slide.css";
 import "./App.css";
 import MyEvents from "../event/MyEvents";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -86,30 +91,51 @@ class App extends Component {
               currentUser={this.state.currentUser}
               component={Profile}
             />
+
             <PrivateRoute
               path="/event"
               authenticated={this.state.authenticated}
               currentUser={this.state.currentUser}
               component={Event}
             />
+
             <PrivateRoute
               path="/myevents"
               authenticated={this.state.authenticated}
               currentUser={this.state.currentUser}
               component={MyEvents}
             />
-            <PrivateRoute
-              path="/shoppingList"
+
+              <PrivateRoute
+               path="/shoppingList"
+               authenticated={this.state.authenticated}
+               currentUser={this.state.currentUser}
+               component={ShoppingList}
+             /> 
+
+
+           <PrivateRoute 
+              path="/eventdetails/:eventId"  
               authenticated={this.state.authenticated}
               currentUser={this.state.currentUser}
-              component={ShoppingList}
+              component={EventDetails} 
             />
+
+            {/* <PrivateRoute 
+              path="/shoppinglist/:list" 
+              authenticated={this.state.authenticated}
+              currentUser={this.state.currentUser} 
+              component={ShoppingList} 
+            />  */}
+             
             <Route
+              exact 
               path="/login"
               render={props => (
                 <Login authenticated={this.state.authenticated} {...props} />
               )}
             />
+
             <Route
               path="/signup"
               render={props => (
@@ -118,6 +144,7 @@ class App extends Component {
             />
             <Route path="/oauth2/redirect" component={OAuth2RedirectHandler} />
             <Route component={NotFound} />
+
           </Switch>
         </div>
         <Alert

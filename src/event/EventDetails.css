@@ -1,18 +1,21 @@
 
   .root{
-    display: flex;
+    display: inline-flex;
+    background-color: white;
+    margin-left: 100px;
+    flex-direction: column;
   }
 
-  .appBar{
-    width: calc(100% - 240px);
-    margin-left: 240;
+  .childitem{
+    display: inline-block;
+    color: #f17070;
   }
 
-  .drawer{
-    width: 240;
-    flex-shrink: 0;
+  .title{
+    font-weight: bold;
+    font-size: 40px;
   }
 
-  .drawerPaper{
-    width: 240;
+  .content{
+    font-size: 20px
   }

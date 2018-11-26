@@ -14,7 +14,7 @@ import { ACCESS_TOKEN } from "../constants";
 import PrivateRoute from "../common/PrivateRoute";
 import Event from "../event/Event";
 import EventDetails from "../event/EventDetails";
-import ShoppingList from "../event/ShoppingList";
+import ShoppingList from "../shoppingList/ShoppingList";
 import Sidebar from "../event/Sidebar";
 
 import Alert from "react-s-alert";
@@ -91,12 +91,14 @@ class App extends Component {
               currentUser={this.state.currentUser}
               component={Profile}
             />
+
             <PrivateRoute
               path="/event"
               authenticated={this.state.authenticated}
               currentUser={this.state.currentUser}
               component={Event}
             />
+
             <PrivateRoute
               path="/myevents"
               authenticated={this.state.authenticated}
@@ -104,21 +106,28 @@ class App extends Component {
               component={MyEvents}
             />
 
-            <PrivateRoute path="/eventdetails"  
-                          authenticated={this.state.authenticated}
-                          currentUser={this.state.currentUser}
-                          component={EventDetails} />
+           <PrivateRoute 
+              path="/eventdetails/:eventId"  
+              authenticated={this.state.authenticated}
+              currentUser={this.state.currentUser}
+              component={EventDetails} 
+            />
 
-            <Route path="/shoppinglist:itemname"  
-                   component={ShoppingList}
-                  /> 
+            <PrivateRoute 
+              path="/shoppinglist/:list" 
+              authenticated={this.state.authenticated}
+              currentUser={this.state.currentUser} 
+              component={ShoppingList} 
+            /> 
              
             <Route
+              exact 
               path="/login"
               render={props => (
                 <Login authenticated={this.state.authenticated} {...props} />
               )}
             />
+
             <Route
               path="/signup"
               render={props => (

@@ -14,7 +14,6 @@ class Sidebar extends Component {
       }
     };
 
-   
     return (
       <React.Fragment>
         <div style={{ display: "flex" }}>
@@ -33,17 +32,17 @@ class Sidebar extends Component {
               <li className="nav-item">
                 <a
                   className="nav-link active"
-                  href="/"
+                  href="/eventdetails"
                   style={{ color: "#f17070" }}
                 >
                   <i class="fas fa-home" />
-                  &nbsp; Details
+                  &nbsp;Details
                 </a>
               </li>
 
               <li className="nav-item">
                 <a
-                  href="/shoppinglist:itemname"
+                  href="/shoppinglist/:itemname"
                   className="nav-link active"
                   style={{ color: "#f17070" }}
                 >
@@ -73,6 +72,7 @@ class Sidebar extends Component {
               </li>
             </ul>
           </div>
+          
         </div>
       </React.Fragment>
     );

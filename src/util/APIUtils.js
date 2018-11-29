@@ -68,6 +68,15 @@ export function getMyEvents(){
   });
 }
 
+export function getShoppingSearch(item){
+  console.log("in request "+ JSON.stringify(item));
+  return request({
+    url: API_BASE_URL + "/events/myevents/shopping/search",
+    method: "POST",
+    body: JSON.stringify(item)
+  });
+}
+
 export function deleteEvent(deleteRequest) {
   console.log(" deleteRequest :: " + deleteRequest);
   return request({

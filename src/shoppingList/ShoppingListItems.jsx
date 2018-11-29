@@ -20,9 +20,9 @@ class ShoppingListItems extends Component{
     var listItems = shoppingEntries.map(this.createTasks);
 
     return (
-      <ul className="theList">
+      <ol className="theList">
           {listItems}
-      </ul>
+      </ol>
     );
   }
 }

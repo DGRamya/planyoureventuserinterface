@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import Jumbotron from "../common/Jumbotron";
 import { getMyEvents } from "../util/APIUtils";
 import Alert from "react-s-alert";
+import { Link } from "react-router-dom";
+import EventDetails from "./EventDetails";
 
 class MyEvents extends Component {
   constructor(props) {
@@ -11,10 +13,11 @@ class MyEvents extends Component {
       str: ""
     };
     this.state.str = [
-      { eventname: "Test Event", venue: "IMU" },
-      { eventname: "Thanksgiving", venue: "IMU" }
+      { eventId:123, eventname: "Test Event", venue: "IMU" },
+      { eventId:789, eventname: "Thanksgiving", venue: "IMU" }
     ];
     this.fetchEvents = this.fetchEvents.bind(this);
+
   }
 
   componentDidMount() {
@@ -39,13 +42,15 @@ class MyEvents extends Component {
         <h1>Events</h1>
         {this.state.str.map((event, i) => {
           return (
+             <Link to={"eventdetails/"+event.eventId} >
             <Jumbotron
               parentMethod={this.fetchEvents}
-              mainText={event.eventName}
+              mainText={event.eventname}
               subText={event.venue}
               displayState="true"
               eventId={event.eventId}
             />
+            </Link>
           );
         })}
       </div>

@@ -4,43 +4,22 @@ import { getMyEvents } from "../util/APIUtils";
 import Alert from "react-s-alert";
 import { Link } from "react-router-dom";
 import EventDetails from "./EventDetails";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { fetchEvents } from "../appActions/eventsActions";
 
 class MyEvents extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      eventList: "",
-      str: ""
-    };
-    this.state.str = [
-      { eventId:123, eventname: "Test Event", venue: "IMU" },
-      { eventId:789, eventname: "Thanksgiving", venue: "IMU" }
-    ];
-    this.fetchEvents = this.fetchEvents.bind(this);
+ 
 
-  }
-
-  componentDidMount() {
-    this.fetchEvents();
-  }
-
-  fetchEvents() {
-    getMyEvents()
-      .then(response => {
-        this.setState({
-          str: response.events
-        });
-      })
-      .catch(error => {
-        Alert.error("Oops! Something went wrong. Please try again!");
-      });
+  componentWillMount() {
+    this.props.fetchEvents();
   }
 
   render() {
     return (
       <div>
         <h1>Events</h1>
-        {this.state.str.map((event, i) => {
+        {this.state.events.map((event, i) => {
           return (
              <Link to={"eventdetails/"+event.eventId} >
             <Jumbotron
@@ -57,4 +36,21 @@ class MyEvents extends Component {
     );
   }
 }
-export default MyEvents;
+
+
+
+MyEvents.propTypes = {
+  fetchPosts: PropTypes.func.isRequired,
+  posts: PropTypes.array.isRequired
+  //newEvent: PropTypes.object
+};
+
+const mapStatetoProps = state => ({
+  events: state.events.items
+  //newEvent: state.posts.item
+});
+
+export default connect(
+  mapStatetoProps,
+  { fetchEvents }
+)(MyEvents);

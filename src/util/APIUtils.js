@@ -68,19 +68,19 @@ export function getMyEvents(){
   });
 }
 
-<<<<<<< HEAD
 export function getShoppingSearch(item){
   console.log("in request "+ JSON.stringify(item));
   return request({
     url: API_BASE_URL + "/events/myevents/shopping/search",
     method: "POST",
     body: JSON.stringify(item)
-=======
+  });
+}
+
 export function getEventDetails(){
   return request({
     url: API_BASE_URL + "/events/myevents/eventdetails/${eventId}",
     method: "GET"
->>>>>>> 40d4d60f32e1d60d66e452cac3b554207b75848f
   });
 }
 

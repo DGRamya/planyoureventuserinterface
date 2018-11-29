@@ -9,8 +9,6 @@ import { connect } from "react-redux";
 import { fetchEvents } from "../appActions/eventsActions";
 
 class MyEvents extends Component {
- 
-
   componentWillMount() {
     this.props.fetchEvents();
   }
@@ -19,16 +17,16 @@ class MyEvents extends Component {
     return (
       <div>
         <h1>Events</h1>
-        {this.state.events.map((event, i) => {
+        {this.props.events.map((event, i) => {
           return (
-             <Link to={"eventdetails/"+event.eventId} >
-            <Jumbotron
-              parentMethod={this.fetchEvents}
-              mainText={event.eventname}
-              subText={event.venue}
-              displayState="true"
-              eventId={event.eventId}
-            />
+            <Link to={"eventdetails/" + event.eventId}>
+              <Jumbotron
+                parentMethod={this.fetchEvents}
+                mainText={event.eventname}
+                subText={event.venue}
+                displayState="true"
+                eventId={event.eventId}
+              />
             </Link>
           );
         })}
@@ -37,16 +35,14 @@ class MyEvents extends Component {
   }
 }
 
-
-
 MyEvents.propTypes = {
-  fetchPosts: PropTypes.func.isRequired,
-  posts: PropTypes.array.isRequired
+  fetchEvents: PropTypes.func.isRequired,
+  events: PropTypes.array.isRequired
   //newEvent: PropTypes.object
 };
 
 const mapStatetoProps = state => ({
-  events: state.events.items
+  events: state.events.events
   //newEvent: state.posts.item
 });
 

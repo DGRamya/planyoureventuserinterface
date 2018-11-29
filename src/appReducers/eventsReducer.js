@@ -1,8 +1,8 @@
 import { FETCH_EVENTS } from "../appActions/types";
 
 const initialState = {
-  items: [],
-  item: {}
+  events: [],
+  event: {}
 };
 
 export default function(state = initialState, action) {
@@ -10,14 +10,14 @@ export default function(state = initialState, action) {
     case FETCH_EVENTS:
       return {
         ...state, // return current state with the spread operator
-        items: action.payload
+        events: action.payload
       };
 
-    case NEW_POST:
-      return {
-        ...state,
-        item: action.payload
-      };
+    // case NEW_POST:
+    //   return {
+    //     ...state,
+    //     item: action.payload
+    //   };
     default:
       return state;
   }

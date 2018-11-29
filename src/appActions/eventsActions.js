@@ -2,19 +2,15 @@ import { FETCH_EVENTS } from "./types";
 import { getMyEvents } from "../util/APIUtils";
 
 export const fetchEvents = () => dispatch => {
+  getMyEvents().then(response =>
+    dispatch({
+      type: FETCH_EVENTS,
+      payload: response.events
+    })
+  );
+};
 
-    getMyEvents()
-    .then(res => res.json())
-    .then(events =>
-      dispatch({
-        type: FETCH_EVENTS,
-        payload: events
-      })
-    );
-
-  };
-  
- // export const createPost = postData => dispatch => {
+// export const createPost = postData => dispatch => {
 //     fetch("https://jsonplaceholder.typicode.com/posts", {
 //       method: "POST",
 //       headers: {

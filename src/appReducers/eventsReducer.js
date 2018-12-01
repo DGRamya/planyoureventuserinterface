@@ -1,4 +1,4 @@
-import { FETCH_EVENTS } from "../appActions/types";
+import { FETCH_EVENTS, DELETE_EVENT_BY_EVENT_ID } from "../appActions/types";
 
 const initialState = {
   events: [],
@@ -13,11 +13,11 @@ export default function(state = initialState, action) {
         events: action.payload
       };
 
-    // case NEW_POST:
-    //   return {
-    //     ...state,
-    //     item: action.payload
-    //   };
+    case DELETE_EVENT_BY_EVENT_ID:
+      return {
+        ...state,
+        events: action.payload
+      };
     default:
       return state;
   }

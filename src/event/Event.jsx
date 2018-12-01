@@ -14,7 +14,7 @@ class Event extends Component {
     this.state = {
       eventname: "",
       eventvenue: "",
-      eventDate: "",
+      eventDate: ""
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,7 +23,7 @@ class Event extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-  
+
     const eventDetails = {};
     for (const field in this.refs) {
       eventDetails[field] = this.refs[field].value;
@@ -44,13 +44,13 @@ class Event extends Component {
         this.props.history.push("/");
       })
       .catch(error => {
-        Alert.error("Oops! Something went wrong. Please try again!");
+        Alert.error("create event page Please try again!");
       });
     event.target.reset();
   };
 
   handleDateChange(day) {
-    alert("handle"+day);
+    alert("handle" + day);
     this.setState({
       eventDate: day
     });

@@ -61,15 +61,15 @@ export function createEvent(eventRequest) {
   });
 }
 
-export function getMyEvents(){
+export function getMyEvents() {
   return request({
     url: API_BASE_URL + "/events/myevents/",
     method: "GET"
   });
 }
 
-export function getShoppingSearch(item){
-  console.log("in request "+ JSON.stringify(item));
+export function getShoppingSearch(item) {
+  console.log("in request " + JSON.stringify(item));
   return request({
     url: API_BASE_URL + "/events/myevents/shopping/search",
     method: "POST",
@@ -77,7 +77,7 @@ export function getShoppingSearch(item){
   });
 }
 
-export function getEventDetails(){
+export function getEventDetails() {
   return request({
     url: API_BASE_URL + "/events/myevents/eventdetails/${eventId}",
     method: "GET"
@@ -85,7 +85,7 @@ export function getEventDetails(){
 }
 
 export function deleteEvent(deleteRequest) {
-  console.log(" deleteRequest :: " + deleteRequest);
+  console.log(" deleteRequest :: " + JSON.stringify(deleteRequest));
   return request({
     url: API_BASE_URL + "/events/myevents/delete",
     method: "POST",

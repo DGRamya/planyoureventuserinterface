@@ -19,15 +19,13 @@ class MyEvents extends Component {
         <h1>Events</h1>
         {this.props.events.map((event, i) => {
           return (
-            <Link to={"eventdetails/" + event.eventId}>
-              <Jumbotron
-                parentMethod={this.fetchEvents}
-                mainText={event.eventname}
-                subText={event.venue}
-                displayState="true"
-                eventId={event.eventId}
-              />
-            </Link>
+            <Jumbotron
+              parentMethod={this.props.fetchEvents}
+              mainText={event.eventname}
+              subText={event.venue}
+              displayState="true"
+              eventId={event.eventId}
+            />
           );
         })}
       </div>

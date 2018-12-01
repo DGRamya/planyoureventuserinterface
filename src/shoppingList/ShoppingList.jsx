@@ -139,7 +139,7 @@ saveItem(e) {
           <h2>Walmart Search Results</h2>
         </div>
     </SplitPane>
-  
+
     </div>
    )}
     </div>

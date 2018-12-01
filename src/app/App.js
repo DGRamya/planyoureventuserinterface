@@ -10,6 +10,7 @@ import OAuth2RedirectHandler from "../user/oauth2/OAuth2RedirectHandler";
 import NotFound from "../common/NotFound";
 import LoadingIndicator from "../common/LoadingIndicator";
 import ShoppingList from "../shoppingList/ShoppingList";
+import InviteGuests from "../inviteGuests/InviteGuests";
 import { getCurrentUser } from "../util/APIUtils";
 import { ACCESS_TOKEN } from "../constants";
 import PrivateRoute from "../common/PrivateRoute";
@@ -111,25 +112,32 @@ class App extends Component {
                authenticated={this.state.authenticated}
                currentUser={this.state.currentUser}
                component={ShoppingList}
-             /> 
+             />
 
-
-           <PrivateRoute 
-              path="/eventdetails/:eventId"  
+             <PrivateRoute
+              path="/inviteGuests"
               authenticated={this.state.authenticated}
               currentUser={this.state.currentUser}
-              component={EventDetails} 
+              component={InviteGuests}
             />
 
-            {/* <PrivateRoute 
-              path="/shoppinglist/:list" 
+
+           <PrivateRoute
+              path="/eventdetails/:eventId"
               authenticated={this.state.authenticated}
-              currentUser={this.state.currentUser} 
-              component={ShoppingList} 
+              currentUser={this.state.currentUser}
+              component={EventDetails}
+            />
+
+            {/* <PrivateRoute
+              path="/shoppinglist/:list"
+              authenticated={this.state.authenticated}
+              currentUser={this.state.currentUser}
+              component={ShoppingList}
             />  */}
-             
+
             <Route
-              exact 
+              exact
               path="/login"
               render={props => (
                 <Login authenticated={this.state.authenticated} {...props} />

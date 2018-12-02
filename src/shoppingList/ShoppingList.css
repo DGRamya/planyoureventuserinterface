@@ -14,6 +14,20 @@
   border: 2px solid #0066FF;
   width: 10%;
 }
+.shoppingListMain .header select {
+  padding: 1%;
+  font-size: 1rem;
+  border: 1% solid #FFF;
+  width: 15%;
+  margin-left: 32%;
+}
+.shoppingListMain .header label {
+  padding: 1%;
+  font-size: 1rem;
+  border: 1% solid #FFF;
+  width: 15%;
+  color: #333;
+}
 .shoppingListMain .header button:hover {
   background-color: #003399;
   border: 1% solid #003399;

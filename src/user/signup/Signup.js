@@ -87,6 +87,7 @@ class SignupForm extends Component {
 
     signup(signUpRequest)
       .then(response => {
+        console.log(response);
         Alert.success(
           "You're successfully registered. Please login to continue!"
         );

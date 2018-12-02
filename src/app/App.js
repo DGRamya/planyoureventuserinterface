@@ -23,6 +23,11 @@ import "react-s-alert/dist/s-alert-css-effects/slide.css";
 import "./App.css";
 import MyEvents from "../event/MyEvents";
 
+//redux changes
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import store from "../store";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -75,86 +80,89 @@ class App extends Component {
     }
 
     return (
-      <div className="app">
-        <div className="app-top-box">
-          <AppHeader
-            authenticated={this.state.authenticated}
-            onLogout={this.handleLogout}
-          />
-        </div>
-        <div className="app-body">
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <PrivateRoute
-              path="/profile"
+      <Provider store={store}>
+        <div className="app">
+          <div className="app-top-box">
+            <AppHeader
               authenticated={this.state.authenticated}
-              currentUser={this.state.currentUser}
-              component={Profile}
+              onLogout={this.handleLogout}
             />
-
-            <PrivateRoute
-              path="/event"
-              authenticated={this.state.authenticated}
-              currentUser={this.state.currentUser}
-              component={Event}
-            />
-
-            <PrivateRoute
-              path="/myevents"
-              authenticated={this.state.authenticated}
-              currentUser={this.state.currentUser}
-              component={MyEvents}
-            />
+          </div>
+          <div className="app-body">
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <PrivateRoute
+                path="/profile"
+                authenticated={this.state.authenticated}
+                currentUser={this.state.currentUser}
+                component={Profile}
+              />
 
               <PrivateRoute
-               path="/shoppingList"
-               authenticated={this.state.authenticated}
-               currentUser={this.state.currentUser}
-               component={ShoppingList}
-             /> 
+                path="/event"
+                authenticated={this.state.authenticated}
+                currentUser={this.state.currentUser}
+                component={Event}
+              />
 
+              <PrivateRoute
+                path="/myevents"
+                authenticated={this.state.authenticated}
+                currentUser={this.state.currentUser}
+                component={MyEvents}
+              />
 
-           <PrivateRoute 
-              path="/eventdetails/:eventId"  
-              authenticated={this.state.authenticated}
-              currentUser={this.state.currentUser}
-              component={EventDetails} 
-            />
+              <PrivateRoute
+                path="/shoppingList"
+                authenticated={this.state.authenticated}
+                currentUser={this.state.currentUser}
+                component={ShoppingList}
+              />
 
-            {/* <PrivateRoute 
+              <PrivateRoute
+                path="/eventdetails/:eventId"
+                authenticated={this.state.authenticated}
+                currentUser={this.state.currentUser}
+                component={EventDetails}
+              />
+
+              {/* <PrivateRoute 
               path="/shoppinglist/:list" 
               authenticated={this.state.authenticated}
               currentUser={this.state.currentUser} 
               component={ShoppingList} 
             />  */}
-             
-            <Route
-              exact 
-              path="/login"
-              render={props => (
-                <Login authenticated={this.state.authenticated} {...props} />
-              )}
-            />
 
-            <Route
-              path="/signup"
-              render={props => (
-                <Signup authenticated={this.state.authenticated} {...props} />
-              )}
-            />
-            <Route path="/oauth2/redirect" component={OAuth2RedirectHandler} />
-            <Route component={NotFound} />
+              <Route
+                exact
+                path="/login"
+                render={props => (
+                  <Login authenticated={this.state.authenticated} {...props} />
+                )}
+              />
 
-          </Switch>
+              <Route
+                path="/signup"
+                render={props => (
+                  <Signup authenticated={this.state.authenticated} {...props} />
+                )}
+              />
+              <Route
+                path="/oauth2/redirect"
+                component={OAuth2RedirectHandler}
+              />
+              <Route component={NotFound} />
+            </Switch>
+          </div>
+          <Alert
+            stack={{ limit: 3 }}
+            timeout={3000}
+            position="top-right"
+            effect="slide"
+            offset={65}
+          />
         </div>
-        <Alert
-          stack={{ limit: 3 }}
-          timeout={3000}
-          position="top-right"
-          effect="slide"
-          offset={65}
-        />
-      </div>
+      </Provider>
     );
   }
 }

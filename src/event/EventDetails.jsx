@@ -15,16 +15,13 @@ class EventDetails extends Component {
     }
 
     render() {
-        console.log(this.props.event);
         return (
           <div className="root">
-              { <div>
+              <div>
                  <Sidebar eventId={this.props.event.eventid}/>
-              </div> }
-              <div className="childitem title">
-              {this.props.event.eventname}
-              </div> <br />
-              <div className="childitem content">
+              </div>
+              <div className="childitem">
+                  Event Name : {this.props.event.eventname} <br /><br />
                   Event Venue : {this.props.event.venue} <br /><br />
                   {/* Description : {event.description} <br /><br /> <br /><br /> */}
               </div>

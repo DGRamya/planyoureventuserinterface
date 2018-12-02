@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faStroopwafel } from "@fortawesome/free-solid-svg-icons";
+import { slide as Menu } from 'react-burger-menu';
 import "./navBar.css";
 library.add(faStroopwafel);
 
@@ -17,9 +18,7 @@ class Sidebar extends Component {
               padding: "20px",
               width: "200%",
               background: "#2F363A",
-              
-              marginTop: "-24px",
-              minheight: "100%"
+              height: "400px"
             }}
           >
             <div className="sidebar-header">
@@ -84,6 +83,7 @@ class Sidebar extends Component {
           </div>
         </div>
       </React.Fragment>
+
     );
   }
 }

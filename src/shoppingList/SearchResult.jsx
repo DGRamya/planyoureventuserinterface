@@ -1,19 +1,26 @@
 import React, { Component } from "react";
 import Alert from "react-s-alert";
 import "./SearchResult.css"
+import Popup from "./Popup";
+import SplitPane from "react-split-pane";
 
 class SearchResults extends Component{
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
+    this.state = {
+      showPopup: false
+    };
+  }
+  togglePopup() {
+    this.setState({
+      showPopup: !this.state.showPopup
+    });
   }
 
   render() {
-    var search = []
-    for (let i = 0; i < 6; i++) {
-        search.push(this.props.entries[i]);
-    }
-    console.log(search);
     return (
+      <div>
+      <SplitPane split="horizontal" defaultSize={600}>
       <div>
         {this.props.entries.map((entry, index) =>
         index < 8 ?
@@ -27,6 +34,19 @@ class SearchResults extends Component{
             </div>
         </div> : <div></div>
         )}
+
+    </div>
+    <div className="header">
+      <button onClick={this.togglePopup.bind(this)}>Show More</button>
+    </div>
+    </SplitPane>
+    {this.state.showPopup ?
+          <Popup
+            entries={this.props.entries}
+            closePopup={this.togglePopup.bind(this)}
+          />
+          : null
+        }
     </div>
     )
   }

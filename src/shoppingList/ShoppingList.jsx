@@ -6,11 +6,14 @@ import {getShoppingSearch} from "../util/APIUtils"
 import Alert from "react-s-alert";
 import axios from "axios";
 import SearchResults from "./SearchResult";
-
+import Sidebar from "../event/Sidebar";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import  { getMyEventDetails } from "../appActions/eventsActions";
 
 class ShoppingList extends Component{
   constructor(props) {
-  super(props);
+  super();
   this.state = {
   items: [],
   shoppingitems: [{},{},{},{},{}],
@@ -99,9 +102,13 @@ saveItem(e) {
 
   render() {
     const { isSaved} = this.state;
+    console.log("In shoppinglist check 2" +  JSON.stringify(this.props.event));
     return (
 
   <div>
+  { <div>
+     <Sidebar/>
+  </div> }
    {!isSaved ? (
       <div className="shoppingListMain">
         <div className="header">
@@ -117,7 +124,7 @@ saveItem(e) {
               <option value="customerRating">CustomerRating</option>
               <option value="new">New</option>
             </select>
-            <label> Items
+            <label> No Items
             <input name="numItems" type="number" value={this.state.numItems} onChange={this.handleInputChange} />
             </label>
         </div>

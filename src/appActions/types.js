@@ -1,3 +1,4 @@
 export const FETCH_EVENTS = "FETCH_EVENTS";
 export const DELETE_EVENT_BY_EVENT_ID = "DELETE_EVENT_BY_EVENT_ID";
-//export const NEW_POST = "NEW_POST";
+export const CREATE_EVENT = "CREATE_EVENT";
+export const GET_EVENT_DETAILS = "GET_EVENT_DETAILS";

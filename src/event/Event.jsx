@@ -5,7 +5,10 @@ import "react-day-picker/lib/style.css";
 import "./Event.css";
 import { API_BASE_URL, ACCESS_TOKEN } from "../constants";
 import { createEvent } from "../util/APIUtils";
-import Alert from "react-s-alert";
+import Alert from "react-s-alert"; 
+import  { createMyEvent } from "../appActions/eventsActions";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 class Event extends Component {
   constructor(props) {
@@ -38,15 +41,20 @@ class Event extends Component {
     console.log("printing the event data" + JSON.stringify(eventData));
     const eventRequest = Object.assign({}, eventData);
 
-    createEvent(eventRequest)
-      .then(response => {
-        Alert.success("Event created successfully!");
-        this.props.history.push("/");
-      })
-      .catch(error => {
-        Alert.error("create event page Please try again!");
-      });
-    event.target.reset();
+    // createEvent(eventRequest)
+    //   .then(response => {
+    //     Alert.success("Event created successfully!");
+    //     this.props.history.push("/");
+    //   })
+    //   .catch(error => {
+    //     Alert.error("create event page Please try again!");
+    //   });
+    // event.target.reset();
+
+    // call action
+    //this.props.deleteMyEvent(this.props.eventId);
+    this.props.createMyEvent(eventRequest);
+    Alert.success("Event created successfully!");
   };
 
   handleDateChange(day) {
@@ -56,7 +64,7 @@ class Event extends Component {
     });
   }
 
-  render() {
+  render() { 
     const { selectedDay } = this.state;
     return (
       <div style={{ backgroundColor: "white" }}>
@@ -105,4 +113,12 @@ class Event extends Component {
   }
 }
 
-export default Event;
+
+Event.proptypes = {
+  createMyEvent: PropTypes.func.isRequired
+};
+
+export default connect(
+  null,
+  { createMyEvent }
+)(Event);

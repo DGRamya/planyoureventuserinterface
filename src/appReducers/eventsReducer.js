@@ -1,4 +1,4 @@
-import { FETCH_EVENTS, DELETE_EVENT_BY_EVENT_ID } from "../appActions/types";
+import { FETCH_EVENTS, DELETE_EVENT_BY_EVENT_ID, CREATE_EVENT, GET_EVENT_DETAILS } from "../appActions/types";
 
 const initialState = {
   events: [],
@@ -18,6 +18,19 @@ export default function(state = initialState, action) {
         ...state,
         events: action.payload
       };
+     
+    case CREATE_EVENT:
+      return {
+        ...state,
+        event: action.payload
+      } ;
+
+    case GET_EVENT_DETAILS:
+      return {
+        ...state,
+        event: action.payload
+      };  
+
     default:
       return state;
   }

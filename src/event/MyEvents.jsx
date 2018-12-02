@@ -21,7 +21,7 @@ class MyEvents extends Component {
           return (
             <Jumbotron
               parentMethod={this.props.fetchEvents}
-              mainText={event.eventname}
+              mainText={event.eventName}
               subText={event.venue}
               displayState="true"
               eventId={event.eventId}

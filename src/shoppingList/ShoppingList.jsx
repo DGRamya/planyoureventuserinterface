@@ -6,23 +6,40 @@ import {getShoppingSearch} from "../util/APIUtils"
 import Alert from "react-s-alert";
 import axios from "axios";
 import SearchResults from "./SearchResult";
-
+import Sidebar from "../event/Sidebar";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import  { getMyEventDetails } from "../appActions/eventsActions";
 
 class ShoppingList extends Component{
   constructor(props) {
-  super(props);
+  super();
   this.state = {
   items: [],
   shoppingitems: [{},{},{},{},{}],
   isSaved: false,
-  showModal: false,
+  value: "Relevance",
+  numItems: 10
 };
   this.addItem = this.addItem.bind(this);
   this.deleteItem = this.deleteItem.bind(this);
+  this.handleChange = this.handleChange.bind(this);
+  this.handleInputChange = this.handleInputChange.bind(this);
 }
 
-handleToggleModal() {
-    this.setState({ showModal: !this.state.showModal });
+handleChange(event) {
+    this.setState({value: event.target.value});
+    console.log("drop down seleted", this.state.value);
+}
+
+handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
 }
 
 addItem(e) {
@@ -58,7 +75,9 @@ searchItem(e) {
     isSaved: false
   });
   shoppingData["item"] = this._inputElement.value;
-  console.log("searchItem method "+shoppingData);
+  shoppingData["sort"] = this.state.value;
+  shoppingData["numItems"] = this.state.numItems;
+  console.log("searchItem method "+JSON.stringify(shoppingData));
   getShoppingSearch(shoppingData)
     .then(response => {
       console.log(response);
@@ -83,10 +102,13 @@ saveItem(e) {
 
   render() {
     const { isSaved} = this.state;
-    const { showModal} = this.state.showModal;
+    console.log("In shoppinglist check 2" +  JSON.stringify(this.props.event));
     return (
 
   <div>
+  { <div>
+     <Sidebar/>
+  </div> }
    {!isSaved ? (
       <div className="shoppingListMain">
         <div className="header">
@@ -94,7 +116,17 @@ saveItem(e) {
             </input>
             <button onClick={(e) => this.addItem(e)}>add</button>
             <button onClick={(e) => this.searchItem(e)}>search</button>
-            <button onClick={() => this.handleToggleModal()}>search</button>
+            <select value={this.state.value} onChange={this.handleChange}>
+              <option value="relevance">Relevance</option>
+              <option value="price">Price</option>
+              <option value="title">Title</option>
+              <option value="bestseller">Bestseller</option>
+              <option value="customerRating">CustomerRating</option>
+              <option value="new">New</option>
+            </select>
+            <label> No Items
+            <input name="numItems" type="number" value={this.state.numItems} onChange={this.handleInputChange} />
+            </label>
         </div>
 
         <SplitPane split="vertical" defaultSize={650}>
@@ -110,7 +142,7 @@ saveItem(e) {
 
 
      <div>
-        <h2>Walmart Search Results</h2>
+
         <SearchResults entries={this.state.shoppingitems}/>
      </div>
      </SplitPane>

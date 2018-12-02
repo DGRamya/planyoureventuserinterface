@@ -9,6 +9,7 @@ import Alert from "react-s-alert";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { deleteMyEvent } from "../appActions/eventsActions";
+import EventDetails from "../event/EventDetails";
 
 class Jumbotron extends Component {
   constructor(props) {
@@ -46,7 +47,7 @@ class Jumbotron extends Component {
         <p>{this.props.subText}</p>
         <PrimaryButton
           buttonText="Learn more"
-          buttonLink={this.props.buttonLink}
+          buttonLink={"/eventdetails/"+this.props.eventId}
         />
         {this.props.displayState == "true" ? (
           <div className="deleteIcon">

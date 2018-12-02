@@ -21,8 +21,10 @@ class EventDetails extends Component {
                  <Sidebar eventId={this.props.event.eventid}/>
               </div>
               <div className="childitem">
-                  Event Name : {this.props.event.eventname} <br /><br />
-                  Event Venue : {this.props.event.venue} <br /><br />
+                  Event Name : 
+                  <input type="text" value={this.props.event.eventname} style={{width: "200px", height: "30px"}}/> <br /><br />
+                  Event Venue : 
+                  <input type="text" value={this.props.event.venue} style={{width: "200px", height: "30px"}}/> <br /><br />
                   {/* Description : {event.description} <br /><br /> <br /><br /> */}
               </div>
           </div>

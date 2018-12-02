@@ -88,10 +88,11 @@ sendInvite(e) {
    );
   }
   render() {
-    { <div>
-     <Sidebar/>
-  </div> }
     return (
+      <div>
+       <div>
+       <Sidebar/>
+    </div>
       <div className="shoppingListMain">
         <div className="header">
           <form onSubmit={this.addItem}>
@@ -120,6 +121,7 @@ sendInvite(e) {
             </textarea>
           </div>
         </div>
+      </div>
       </div>
     );
   }

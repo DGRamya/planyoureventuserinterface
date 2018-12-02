@@ -24,6 +24,11 @@ import "react-s-alert/dist/s-alert-css-effects/slide.css";
 import "./App.css";
 import MyEvents from "../event/MyEvents";
 
+//redux changes
+import { Provider } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import store from "../store";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -76,6 +81,7 @@ class App extends Component {
     }
 
     return (
+    <Provider store={store}>
       <div className="app">
         <div className="app-top-box">
           <AppHeader
@@ -163,6 +169,7 @@ class App extends Component {
           offset={65}
         />
       </div>
+    </Provider>
     );
   }
 }

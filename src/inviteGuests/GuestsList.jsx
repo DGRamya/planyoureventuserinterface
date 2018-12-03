@@ -8,8 +8,12 @@ class GuestsList extends Component{
   }
 
   createTasks(item) {
-    return <li onClick={() => this.delete(item.key)}
-              key={item.key}>{item.text}</li>
+return <div className="theList2">
+<li onClick={() => this.delete(item.key)}
+              key={item.key}>
+              {item.text}
+              </li>
+              </div>
   }
 
   delete(key) {
@@ -18,11 +22,8 @@ class GuestsList extends Component{
   render() {
     var shoppingEntries = this.props.entries;
     var listItems = shoppingEntries.map(this.createTasks);
-
-    return (
-      <ul className="theList">
-          {listItems}
-      </ul>
+  return (
+    <div className="theList"> {listItems} </div>
     );
   }
 }

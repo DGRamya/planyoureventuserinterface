@@ -79,7 +79,14 @@ export function getShoppingSearch(item) {
   });
 }
 
-
+export function sendInvite(guestList) {
+  console.log('in apiutils..');
+  return request({
+    url: API_BASE_URL + "/invites/sendmail",
+    method: "POST",
+    body: JSON.stringify(guestList)
+  });
+}
 export function getEventDetails(){
   return request({
     url: API_BASE_URL + "/events/myevents/eventdetails/${eventId}",

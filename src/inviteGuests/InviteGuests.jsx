@@ -1,12 +1,17 @@
 import React, { Component } from "react";
 import GuestsList from "./GuestsList";
 import "../shoppingList/ShoppingList.css";
+import Alert from "react-s-alert";
+import {sendInvite} from "../util/APIUtils"
 
 class InviteGuests extends Component{
   constructor(props) {
   super(props);
   this.state = {
-  items: []
+  items: [],
+  isSaved: false,
+  emailContent: '',
+  emailSubject: '',
 };
   this.addItem = this.addItem.bind(this);
   this.deleteItem = this.deleteItem.bind(this);
@@ -38,7 +43,49 @@ deleteItem(key) {
     items: filteredItems
   });
 }
+saveItem(e) {
+  Alert.success("Shopping List saved successfully");
+  this.setState({
+    isSaved: true
+  });
 
+}
+sendInvite(e) {
+  console.log("sendInvite called ");
+       var email = {};
+       var list = this.state.items;
+       var emailList = [];
+       list.map((l) => emailList.push(l.text));
+       email["emailId"] = emailList;
+       email["emailContent"] = this.state.emailContent;
+       email["emailSubject"] = this.state.emailSubject;
+
+       console.log(email);
+      sendInvite(email)
+        .then(response => {
+          console.log(JSON.stringify(response));
+        })
+        .catch(error => {
+          Alert.error(
+            (error && error.message) ||
+              "Oops! Something went wrong in email sending. Please try again!"
+          );
+        });
+  }
+
+  handleChange = event => {
+    this.setState({
+       emailContent: event.target.value
+     }
+   );
+  }
+
+  handleSubjectChange = event => {
+    this.setState({
+       emailSubject: event.target.value
+     }
+   );
+  }
   render() {
     return (
       <div className="shoppingListMain">
@@ -49,8 +96,26 @@ deleteItem(key) {
             <button type="submit">add</button>
           </form>
         </div>
-        <GuestsList entries={this.state.items}
-        delete={this.deleteItem}/>
+        <div className="leftDiv">
+          <GuestsList entries={this.state.items}
+          delete={this.deleteItem}/>
+          <div className="header">
+           <button onClick={(e) => this.saveItem(e)}>Save</button>
+           <button onClick={(e) => this.sendInvite(e)}>Send Invite</button>
+         </div>
+        </div>
+        <div className="rightDiv">
+          <div>
+          Send customized email content:
+            <textarea placeholder="You are invited!" onChange={this.handleChange}>
+            </textarea>
+          </div>
+          <div>
+          Send customized email subject:
+            <textarea placeholder="You are invited!" onChange={this.handleSubjectChange}>
+            </textarea>
+          </div>
+        </div>
       </div>
     );
   }

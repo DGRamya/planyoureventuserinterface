@@ -8,8 +8,9 @@ class ShoppingListItems extends Component{
   }
 
   createTasks(item) {
-    return <li onClick={() => this.delete(item.key)}
-              key={item.key}>{item.text}</li>
+    return <div className="theList2"><li key={item.key}>{item.text}</li>
+              <button style = {{width:"45%"}} onClick={() => this.delete(item.key)} > delete </button>
+</div>
   }
 
   delete(key) {
@@ -20,9 +21,9 @@ class ShoppingListItems extends Component{
     var listItems = shoppingEntries.map(this.createTasks);
 
     return (
-      <ol className="theList">
+      <div className="theList">
           {listItems}
-      </ol>
+      </div>
     );
   }
 }

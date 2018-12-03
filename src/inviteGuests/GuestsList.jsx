@@ -9,10 +9,8 @@ class GuestsList extends Component{
 
   createTasks(item) {
 return <div className="theList2">
-<li onClick={() => this.delete(item.key)}
-              key={item.key}>
-              {item.text}
-              </li>
+<li key={item.key}> {item.text} </li>
+<button onClick={() => this.delete(item.key)} > delete </button>
               </div>
   }
 

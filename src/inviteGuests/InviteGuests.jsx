@@ -89,10 +89,11 @@ sendInvite(e) {
   }
   render() {
     return (
-      <div>
-       <div>
+      <div className="rootDiv">
+      <div className="sidebarDiv">
        <Sidebar/>
-    </div>
+      </div>
+      <div className="childitemDiv">
       <div className="shoppingListMain">
         <div className="header">
           <form onSubmit={this.addItem}>
@@ -112,8 +113,8 @@ sendInvite(e) {
         <div className="rightDiv">
           <div>
           Send customized email content:
-            <textarea placeholder="You are invited!" onChange={this.handleChange}>
-            </textarea>
+            <textarea placeholder="You are invited!" onChange={this.handleChange} />
+            {/* </textarea> */}
           </div>
           <div>
           Send customized email subject:
@@ -121,6 +122,7 @@ sendInvite(e) {
             </textarea>
           </div>
         </div>
+      </div>
       </div>
       </div>
     );

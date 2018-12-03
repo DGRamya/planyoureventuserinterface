@@ -26,7 +26,7 @@ class Sidebar extends Component {
                              buttonLink={"/shoppinglist"} 
                              style={{width: "50px"}}/>
               <SideButton buttonText="Invite"
-                             buttonLink={"/guestlist"} 
+                             buttonLink={"/inviteGuests"} 
                              style={{width: "50px"}}/>
             
           </div>

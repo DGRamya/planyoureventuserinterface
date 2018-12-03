@@ -22,9 +22,11 @@ class EventDetails extends Component {
               </div>
               <div className="childitem">
                   Event Name : 
-                  <input type="text" value={this.props.event.eventname} style={{width: "200px", height: "30px"}}/> <br /><br />
+                  &nbsp;<input type="text" value={this.props.event.eventname} style={{width: "200px", height: "30px"}}/> <br /><br />
                   Event Venue : 
-                  <input type="text" value={this.props.event.venue} style={{width: "200px", height: "30px"}}/> <br /><br />
+                  &nbsp;<input type="text" value={this.props.event.venue} style={{width: "200px", height: "30px"}}/> <br /><br />
+                  Event Date : 
+                  &nbsp;<input type="text" value={this.props.event.date} style={{width: "200px", height: "30px"}}/> <br /><br />
                   {/* Description : {event.description} <br /><br /> <br /><br /> */}
               </div>
           </div>

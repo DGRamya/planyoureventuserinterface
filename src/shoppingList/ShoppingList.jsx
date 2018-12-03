@@ -105,15 +105,15 @@ saveItem(e) {
     console.log("In shoppinglist check 2" +  JSON.stringify(this.props.event));
     return (
 
-  <div>
-  { <div>
-     <Sidebar/>
-  </div> }
-   {!isSaved ? (
+  <div className="rootDiv">
+      <div className="sidebarDiv">
+       <Sidebar/>
+      </div>
+   { !isSaved ?
+      <div className="childitemDiv">
       <div className="shoppingListMain">
         <div className="header">
-            <input ref={(a) => this._inputElement = a} placeholder="Add an item..">
-            </input>
+            <input ref={(a) => this._inputElement = a} placeholder="Add an item.."></input>
             <button onClick={(e) => this.addItem(e)}>add</button>
             <button onClick={(e) => this.searchItem(e)}>search</button>
             <select value={this.state.value} onChange={this.handleChange}>
@@ -125,56 +125,54 @@ saveItem(e) {
               <option value="new">New</option>
             </select>
             <label> No Items
-            <input name="numItems" type="number" value={this.state.numItems} onChange={this.handleInputChange} />
+              <input name="numItems" type="number" value={this.state.numItems} onChange={this.handleInputChange} />
             </label>
         </div>
 
         <SplitPane split="vertical" defaultSize={650}>
-        <SplitPane split="horizontal" defaultSize={350}>
-         <div>
-            <h2>Shopping List</h2>
-            <ShoppingListItems entries={this.state.items} delete={this.deleteItem}></ShoppingListItems>
+          <SplitPane split="horizontal" defaultSize={350}>
+            <div> 
+              <h2>Shopping List</h2>
+              <ShoppingListItems entries={this.state.items} delete={this.deleteItem}></ShoppingListItems>
+            </div>
+            <div className="header">
+              <button onClick={(e) => this.saveItem(e)}>Save</button>
+            </div>
+          </SplitPane>
+          <div>
+            <SearchResults entries={this.state.shoppingitems}/>
           </div>
-         <div className="header">
-          <button onClick={(e) => this.saveItem(e)}>Save</button>
-        </div>
-     </SplitPane>
-
-
-     <div>
-
-        <SearchResults entries={this.state.shoppingitems}/>
+        </SplitPane>
      </div>
-     </SplitPane>
      </div>
-   ):(
+   :
+     <div className="childitemDiv">
      <div className="shoppingListMain">
-       <div className="header">
-           <input ref={(a) => this._inputElement = a} placeholder="Add an item..">
-           </input>
+        <div className="header">
+           <input ref={(a) => this._inputElement = a} placeholder="Add an item.."></input>
            <button onClick={(e) => this.addItem(e)}>add</button>
            <button onClick={(e) => this.searchItem(e)}>search</button>
-
-       </div>
-
-       <SplitPane split="vertical" defaultSize={650}>
-       <SplitPane split="horizontal" defaultSize={350}>
-        <div>
-          <h2>Shopping List</h2>
-          <ShoppingListItems entries={this.state.items} delete={this.deleteItem}></ShoppingListItems>
         </div>
-        <div className="header">
-         <button onClick={(e) => this.saveItem(e)}>Save</button>
-       </div>
-    </SplitPane>
-        <div>
-          <h2>Walmart Search Results</h2>
-        </div>
-    </SplitPane>
 
+        <SplitPane split="vertical" defaultSize={650}>
+          <SplitPane split="horizontal" defaultSize={350}>
+            <div>
+              <h2>Shopping List</h2>
+              <ShoppingListItems entries={this.state.items} delete={this.deleteItem}></ShoppingListItems>
+            </div>
+            <div className="header">
+              <button onClick={(e) => this.saveItem(e)}>Save</button>
+            </div>
+          </SplitPane>
+          <div>
+            <h2>Walmart Search Results</h2>
+          </div>
+        </SplitPane>
     </div>
-   )}
     </div>
+   }
+    </div>
+    
     );
   }
 }

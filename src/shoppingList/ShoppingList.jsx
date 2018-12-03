@@ -105,10 +105,12 @@ saveItem(e) {
     console.log("In shoppinglist check 2" +  JSON.stringify(this.props.event));
     return (
 
-  <div className="rootDiv">
+  <div>
+  <SplitPane split="vertical" defaultSize={200}>
       <div className="sidebarDiv">
        <Sidebar/>
       </div>
+    <div className="rootDiv">
    { !isSaved ?
       <div className="childitemDiv">
       <div className="shoppingListMain">
@@ -124,14 +126,12 @@ saveItem(e) {
               <option value="customerRating">CustomerRating</option>
               <option value="new">New</option>
             </select>
-            <label> No Items
-              <input name="numItems" type="number" value={this.state.numItems} onChange={this.handleInputChange} />
-            </label>
+            <input className="input1" name="numItems" type="number" value={this.state.numItems} onChange={this.handleInputChange} />
         </div>
 
-        <SplitPane split="vertical" defaultSize={650}>
+        <SplitPane split="vertical" defaultSize={500}>
           <SplitPane split="horizontal" defaultSize={350}>
-            <div> 
+            <div>
               <h2>Shopping List</h2>
               <ShoppingListItems entries={this.state.items} delete={this.deleteItem}></ShoppingListItems>
             </div>
@@ -172,7 +172,9 @@ saveItem(e) {
     </div>
    }
     </div>
-    
+    </SplitPane>
+    </div>
+
     );
   }
 }

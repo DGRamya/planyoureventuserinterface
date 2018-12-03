@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faStroopwafel } from "@fortawesome/free-solid-svg-icons";
 import SideButton from "./SideButton";
-import { slide as Menu } from 'react-burger-menu';
 import "./navBar.css";
 library.add(faStroopwafel);
 
@@ -20,15 +19,15 @@ class Sidebar extends Component {
                        height: "600px"}}>
 
               <SideButton buttonText="Details"
-                             buttonLink={"/eventdetails/"+this.props.eventId} 
-                             style={{width: "50px"}}/> 
+                             buttonLink={"/eventdetails/"+this.props.eventId}
+                             style={{width: "50px"}}/>
               <SideButton buttonText="Shopping"
-                             buttonLink={"/shoppinglist"} 
+                             buttonLink={"/shoppinglist"}
                              style={{width: "50px"}}/>
               <SideButton buttonText="Invite"
-                             buttonLink={"/inviteGuests"} 
+                             buttonLink={"/inviteGuests"}
                              style={{width: "50px"}}/>
-            
+
           </div>
         </div>
       </React.Fragment>

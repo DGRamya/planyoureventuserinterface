@@ -3,6 +3,7 @@ import GuestsList from "./GuestsList";
 import "../shoppingList/ShoppingList.css";
 import Alert from "react-s-alert";
 import {sendInvite} from "../util/APIUtils"
+import Sidebar from "../event/Sidebar";
 
 class InviteGuests extends Component{
   constructor(props) {
@@ -87,6 +88,9 @@ sendInvite(e) {
    );
   }
   render() {
+    { <div>
+     <Sidebar/>
+  </div> }
     return (
       <div className="shoppingListMain">
         <div className="header">

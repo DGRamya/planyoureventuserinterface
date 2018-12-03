@@ -8,10 +8,10 @@ class GuestsList extends Component{
   }
 
   createTasks(item) {
-return <div className="theList2">
-<li key={item.key}> {item.text} </li>
-<button onClick={() => this.delete(item.key)} > delete </button>
-              </div>
+return <tr><div className="theList2">
+<td><li key={item.key}> {item.text} </li></td>
+<td><button style = {{width:"100%"}} onClick={() => this.delete(item.key)} > delete </button></td>
+              </div></tr>
   }
 
   delete(key) {
@@ -21,7 +21,7 @@ return <div className="theList2">
     var shoppingEntries = this.props.entries;
     var listItems = shoppingEntries.map(this.createTasks);
   return (
-    <div className="theList"> {listItems} </div>
+    <div className="theList"><table> {listItems} </table></div>
     );
   }
 }

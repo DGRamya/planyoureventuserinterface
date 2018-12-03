@@ -118,6 +118,8 @@ saveItem(e) {
             <input ref={(a) => this._inputElement = a} placeholder="Add an item.."></input>
             <button onClick={(e) => this.addItem(e)}>add</button>
             <button onClick={(e) => this.searchItem(e)}>search</button>
+        </div>
+        <div className="header1">
             <select value={this.state.value} onChange={this.handleChange}>
               <option value="relevance">Relevance</option>
               <option value="price">Price</option>
@@ -126,8 +128,11 @@ saveItem(e) {
               <option value="customerRating">CustomerRating</option>
               <option value="new">New</option>
             </select>
-            <input className="input1" name="numItems" type="number" value={this.state.numItems} onChange={this.handleInputChange} />
+            <label> Number of Items:
+            <input name="numItems" type="number" value={this.state.numItems} onChange={this.handleInputChange} />
+            </label>
         </div>
+
 
         <SplitPane split="vertical" defaultSize={500}>
           <SplitPane split="horizontal" defaultSize={350}>
@@ -140,7 +145,10 @@ saveItem(e) {
             </div>
           </SplitPane>
           <div>
+            <div><h2>Walmart Search</h2></div>
+            <div>
             <SearchResults entries={this.state.shoppingitems}/>
+            </div>
           </div>
         </SplitPane>
      </div>

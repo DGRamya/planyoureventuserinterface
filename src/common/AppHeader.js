@@ -21,20 +21,15 @@ class AppHeader extends Component {
                     <NavLink to="/profile">Profile</NavLink>
                   </li>
                   <li>
-                    <a onClick={this.props.onLogout}>Logout</a>
-                  </li>
-                  <li>
                     <NavLink to="/event">Create Event</NavLink>
                   </li>
                   <li>
                     <NavLink to="/myevents">My Events</NavLink>
                   </li>
                   <li>
-                    <NavLink to="/shoppingList">Shopping List</NavLink>
+                    <a onClick={this.props.onLogout}>Logout</a>
                   </li>
-                  <li>
-                    <NavLink to="/inviteGuests">Invite Guests</NavLink>
-                  </li>
+
                 </ul>
               ) : (
                 <ul>

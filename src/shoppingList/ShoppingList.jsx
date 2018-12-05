@@ -11,6 +11,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import  { getMyEventDetails } from "../appActions/eventsActions";
 
+
 class ShoppingList extends Component{
   constructor(props) {
   super();
@@ -105,7 +106,7 @@ saveItem(e) {
     console.log("In shoppinglist check 2" +  JSON.stringify(this.props.event));
     return (
 
-  <div>
+  <div style={{backgroundImage:'url(' + require('../img/background3.jpg') + ')'}}>
   <SplitPane split="vertical" defaultSize={200}>
       <div className="sidebarDiv">
        <Sidebar/>
@@ -135,7 +136,7 @@ saveItem(e) {
 
 
         <SplitPane split="vertical" defaultSize={500}>
-          <SplitPane split="horizontal" defaultSize={350}>
+          <SplitPane split="horizontal" defaultSize={500}>
             <div>
               <h2>Shopping List</h2>
               <ShoppingListItems entries={this.state.items} delete={this.deleteItem}></ShoppingListItems>

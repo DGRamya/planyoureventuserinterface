@@ -21,12 +21,12 @@ class EventDetails extends Component {
                  <Sidebar eventId={this.props.event.eventid}/>
               </div>
               <div className="childitem">
-                  Event Name : 
+                  Event Name :
                   &nbsp;<input type="text" value={this.props.event.eventname} style={{width: "200px", height: "30px"}}/> <br /><br />
-                  Event Venue : 
+                  Event Venue :
                   &nbsp;<input type="text" value={this.props.event.venue} style={{width: "200px", height: "30px"}}/> <br /><br />
-                  Event Date : 
-                  &nbsp;<input type="text" value={this.props.event.date} style={{width: "200px", height: "30px"}}/> <br /><br />
+                  Event Date :
+                  &nbsp;<input type="text" value={this.props.event.eventdate} style={{width: "200px", height: "30px"}}/> <br /><br />
                   {/* Description : {event.description} <br /><br /> <br /><br /> */}
               </div>
           </div>
@@ -43,12 +43,12 @@ EventDetails.propTypes = {
     event: PropTypes.array.isRequired
     //newEvent: PropTypes.object
   };
-  
+
   const mapStatetoProps = state => ({
     event: state.events.event
     //newEvent: state.posts.item
   });
-  
+
   export default connect(
     mapStatetoProps,
     { getMyEventDetails }

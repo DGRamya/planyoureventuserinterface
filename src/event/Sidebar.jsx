@@ -16,7 +16,7 @@ class Sidebar extends Component {
           <div style={{paddingLeft: "20px",
                        width: "180px",
                        background: "#2F363A",
-                       height: "600px"}}>
+                       height: "900px"}}>
 
               <SideButton buttonText="Details"
                              buttonLink={"/eventdetails/"+this.props.eventId}

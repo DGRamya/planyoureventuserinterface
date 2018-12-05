@@ -4,7 +4,8 @@
   flex-wrap: nowrap;
   justify-content: flex-start;
   align-items: stretch;
-  height: 600px;
+  height: 900px;
+  background-color: #11ffee00;
 }
 
 .sidebarDiv{
@@ -32,9 +33,9 @@
   padding: 1%;
   font-size: 1rem;
   margin: 1%;
-  background-color: #0066FF;
+  background-color: #2F363A;
   color: #FFF;
-  border: 2px solid #0066FF;
+  border: 2px solid #2F363A;
   width: 15%;
 }
 .shoppingListMain .header1 input {
@@ -45,15 +46,6 @@
   margin-left: 1%;
 }
 
-button {
- padding: 1%;
- font-size: 1rem;
- margin: 1%;
- background-color: #0066FF;
- color: #FFF;
- border: 2px solid #0066FF;
- width: 10%;
-}
 .shoppingListMain .header1 select {
   padding: 1%;
   font-size: 1rem;
@@ -70,8 +62,8 @@ button {
   margin-left: 2%;
 }
 .shoppingListMain .header button:hover {
-  background-color: #003399;
-  border: 1% solid #003399;
+  background-color: #0066FF;
+  border: 1% solid #0066FF;
   cursor: pointer;
 }
 .shoppingListMain .theList {
@@ -108,19 +100,50 @@ ul.theList {
   padding: 0;
 }
 .leftDiv{
-  width: 50%;
+  width: 100%;
+  margin-left: 50%;
 }
-.rightDiv{
-  width: 50%;
-  float: right;
-  display: grid;
+.rightDiv {
+  margin-left: 30%;
+  margin-top: 5%;
+}
+.rightDiv div {
+
+  padding-top: 3%;
 }
 .rightDiv textarea{
   padding: 1%;
   font-size: 1rem;
   border: 1% solid #FFF;
-  width: 50%;
+  width: 80%;
   height: 40%;
-  margin-left: 32%;
+  margin-left: 0%;
   overflow: auto;
+}
+
+.guestTable td{
+  margin-right: 25%;
+}
+.thelist2{
+  display: inline-block;
+ vertical-align: text-top;
+ margin: 0 auto;
+}
+
+button {
+ padding: 1%;
+ font-size: 1rem;
+ margin: 1%;
+ background-color: #2F363A;
+ color: #FFF;
+ border: 2px solid #2F363A;
+ width: 10%;
+}
+
+.shoppingListMain .header2 input {
+  padding: 1%;
+  font-size: 1rem;
+  border: 1% solid #FFF;
+  width: 15%;
+  margin-left: 10%;
 }

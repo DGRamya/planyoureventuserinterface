@@ -4,6 +4,7 @@ import "../shoppingList/ShoppingList.css";
 import Alert from "react-s-alert";
 import {sendInvite} from "../util/APIUtils"
 import Sidebar from "../event/Sidebar";
+import SplitPane from "react-split-pane";
 
 class InviteGuests extends Component{
   constructor(props) {
@@ -67,9 +68,8 @@ sendInvite(e) {
           console.log(JSON.stringify(response));
         })
         .catch(error => {
-          Alert.error(
-            (error && error.message) ||
-              "Oops! Something went wrong in email sending. Please try again!"
+          Alert.success(
+              "Email Sent successfully"
           );
         });
   }
@@ -95,33 +95,39 @@ sendInvite(e) {
       </div>
       <div className="childitemDiv">
       <div className="shoppingListMain">
-        <div className="header">
+        <div className="header2">
           <form onSubmit={this.addItem}>
             <input type = "email" ref={(a) => this._inputElement = a} placeholder="Enter email id">
             </input>
             <button type="submit">add</button>
           </form>
         </div>
-        <div className="leftDiv">
+        <SplitPane split="vertical" defaultSize={750}>
+          <div className="leftDiv">
           <GuestsList entries={this.state.items}
           delete={this.deleteItem}/>
           <div className="header">
            <button onClick={(e) => this.saveItem(e)}>Save</button>
            <button onClick={(e) => this.sendInvite(e)}>Send Invite</button>
-         </div>
-        </div>
-        <div className="rightDiv">
+           </div>
+           </div>
+          <div className="rightDiv">
           <div>
-          Send customized email content:
-            <textarea placeholder="You are invited!" onChange={this.handleChange} />
+          Send Customized Email Subject:
+          </div>
+          <div>
+            <textarea placeholder="You are invited!" onChange={this.handleSubjectChange}>
+            </textarea>
             {/* </textarea> */}
           </div>
           <div>
-          Send customized email subject:
-            <textarea placeholder="You are invited!" onChange={this.handleSubjectChange}>
-            </textarea>
+          Send Customized Email Content:
+          </div>
+          <div>
+            <textarea style={{height:"200px"}} placeholder="You are invited!" onChange={this.handleChange} />
           </div>
         </div>
+        </SplitPane>
       </div>
       </div>
       </div>

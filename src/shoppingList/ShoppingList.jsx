@@ -9,7 +9,7 @@ import SearchResults from "./SearchResult";
 import Sidebar from "../event/Sidebar";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import  { getMyEventDetails } from "../appActions/eventsActions";
+import { getEventDetails, updateEventDetails } from "../util/APIUtils";
 
 
 class ShoppingList extends Component{
@@ -20,7 +20,8 @@ class ShoppingList extends Component{
   shoppingitems: [{},{},{},{},{}],
   isSaved: false,
   value: "Relevance",
-  numItems: 10
+  numItems: 10,
+  event: {}
 };
   this.addItem = this.addItem.bind(this);
   this.deleteItem = this.deleteItem.bind(this);
@@ -28,6 +29,24 @@ class ShoppingList extends Component{
   this.handleInputChange = this.handleInputChange.bind(this);
 }
 
+componentWillMount() {
+  //getEventDetails(this.props.match.params.eventId);
+
+  var event = {};
+  event["eventId"] = this.props.match.params.eventId;
+
+  getEventDetails(event).then(response =>
+    {
+      var list = response.shoppingList;
+      var shopList = [];
+      list.map((l) => shopList.push({text: l,
+        key: Date.now()}));
+    this.setState({event: response, items: shopList});
+    console.log("event -- "+JSON.stringify(this.state.event));
+    console.log("items -- "+JSON.stringify(this.state.items));}
+  );
+
+}
 handleChange(event) {
     this.setState({value: event.target.value});
     console.log("drop down seleted", this.state.value);
@@ -64,7 +83,7 @@ deleteItem(key) {
   var filteredItems = this.state.items.filter(function (item) {
     return (item.key !== key);
   });
-
+ 
   this.setState({
     items: filteredItems
   });
@@ -94,11 +113,23 @@ searchItem(e) {
 
 }
 saveItem(e) {
-  Alert.success("Shopping List saved successfully");
+  console.log("new items  == "+this.state.items);
+  var newEvent = this.state.event;
+  var list = this.state.items;
+  var shopList = [];
+  list.map((l) => shopList.push(l.text));
+  newEvent["shoppingList"] = shopList;
+  console.log("newEvent  == "+newEvent);
   this.setState({
-    isSaved: true
+    isSaved: true, 
   });
-
+  updateEventDetails(newEvent).then(response =>
+    {
+      Alert.success("Shopping List saved successfully");}
+  )
+  .catch(error => {
+    Alert.error("Shopping List not updated!!!");
+  });
 }
 
   render() {
@@ -109,7 +140,7 @@ saveItem(e) {
   <div style={{backgroundImage:'url(' + require('../img/background3.jpg') + ')'}}>
   <SplitPane split="vertical" defaultSize={200}>
       <div className="sidebarDiv">
-       <Sidebar/>
+       <Sidebar eventId={this.props.match.params.eventId}/>
       </div>
     <div className="rootDiv">
    { !isSaved ?
@@ -136,7 +167,7 @@ saveItem(e) {
 
 
         <SplitPane split="vertical" defaultSize={500}>
-          <SplitPane split="horizontal" defaultSize={500}>
+          <SplitPane split="horizontal" defaultSize={300}>
             <div>
               <h2>Shopping List</h2>
               <ShoppingListItems entries={this.state.items} delete={this.deleteItem}></ShoppingListItems>

@@ -116,14 +116,14 @@ class App extends Component {
             />
 
               <PrivateRoute
-               path="/shoppingList"
+               path="/shoppingList/:eventId"
                authenticated={this.state.authenticated}
                currentUser={this.state.currentUser}
                component={ShoppingList}
              />
 
              <PrivateRoute
-              path="/inviteGuests"
+              path="/inviteGuests/:eventId"
               authenticated={this.state.authenticated}
               currentUser={this.state.currentUser}
               component={InviteGuests}

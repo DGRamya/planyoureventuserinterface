@@ -91,7 +91,7 @@ sendInvite(e) {
     return (
       <div className="rootDiv">
       <div className="sidebarDiv">
-       <Sidebar/>
+       <Sidebar eventId={this.props.match.params.eventId}/>
       </div>
       <div className="childitemDiv">
       <div className="shoppingListMain">

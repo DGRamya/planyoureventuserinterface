@@ -11,6 +11,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import  { getMyEventDetails } from "../appActions/eventsActions";
 
+
 class ShoppingList extends Component{
   constructor(props) {
   super();
@@ -105,17 +106,21 @@ saveItem(e) {
     console.log("In shoppinglist check 2" +  JSON.stringify(this.props.event));
     return (
 
-  <div>
-  { <div>
-     <Sidebar/>
-  </div> }
-   {!isSaved ? (
+  <div style={{backgroundImage:'url(' + require('../img/background3.jpg') + ')'}}>
+  <SplitPane split="vertical" defaultSize={200}>
+      <div className="sidebarDiv">
+       <Sidebar/>
+      </div>
+    <div className="rootDiv">
+   { !isSaved ?
+      <div className="childitemDiv">
       <div className="shoppingListMain">
         <div className="header">
-            <input ref={(a) => this._inputElement = a} placeholder="Add an item..">
-            </input>
+            <input ref={(a) => this._inputElement = a} placeholder="Add an item.."></input>
             <button onClick={(e) => this.addItem(e)}>add</button>
             <button onClick={(e) => this.searchItem(e)}>search</button>
+        </div>
+        <div className="header1">
             <select value={this.state.value} onChange={this.handleChange}>
               <option value="relevance">Relevance</option>
               <option value="price">Price</option>
@@ -124,57 +129,61 @@ saveItem(e) {
               <option value="customerRating">CustomerRating</option>
               <option value="new">New</option>
             </select>
-            <label> No Items
+            <label> Number of Items:
             <input name="numItems" type="number" value={this.state.numItems} onChange={this.handleInputChange} />
             </label>
         </div>
 
-        <SplitPane split="vertical" defaultSize={650}>
-        <SplitPane split="horizontal" defaultSize={350}>
-         <div>
-            <h2>Shopping List</h2>
-            <ShoppingListItems entries={this.state.items} delete={this.deleteItem}></ShoppingListItems>
+
+        <SplitPane split="vertical" defaultSize={500}>
+          <SplitPane split="horizontal" defaultSize={500}>
+            <div>
+              <h2>Shopping List</h2>
+              <ShoppingListItems entries={this.state.items} delete={this.deleteItem}></ShoppingListItems>
+            </div>
+            <div className="header">
+              <button onClick={(e) => this.saveItem(e)}>Save</button>
+            </div>
+          </SplitPane>
+          <div>
+            <div><h2>Walmart Search</h2></div>
+            <div>
+            <SearchResults entries={this.state.shoppingitems}/>
+            </div>
           </div>
-         <div className="header">
-          <button onClick={(e) => this.saveItem(e)}>Save</button>
-        </div>
-     </SplitPane>
-
-
-     <div>
-
-        <SearchResults entries={this.state.shoppingitems}/>
+        </SplitPane>
      </div>
-     </SplitPane>
      </div>
-   ):(
+   :
+     <div className="childitemDiv">
      <div className="shoppingListMain">
-       <div className="header">
-           <input ref={(a) => this._inputElement = a} placeholder="Add an item..">
-           </input>
+        <div className="header">
+           <input ref={(a) => this._inputElement = a} placeholder="Add an item.."></input>
            <button onClick={(e) => this.addItem(e)}>add</button>
            <button onClick={(e) => this.searchItem(e)}>search</button>
-
-       </div>
-
-       <SplitPane split="vertical" defaultSize={650}>
-       <SplitPane split="horizontal" defaultSize={350}>
-        <div>
-          <h2>Shopping List</h2>
-          <ShoppingListItems entries={this.state.items} delete={this.deleteItem}></ShoppingListItems>
         </div>
-        <div className="header">
-         <button onClick={(e) => this.saveItem(e)}>Save</button>
-       </div>
-    </SplitPane>
-        <div>
-          <h2>Walmart Search Results</h2>
-        </div>
-    </SplitPane>
 
+        <SplitPane split="vertical" defaultSize={650}>
+          <SplitPane split="horizontal" defaultSize={350}>
+            <div>
+              <h2>Shopping List</h2>
+              <ShoppingListItems entries={this.state.items} delete={this.deleteItem}></ShoppingListItems>
+            </div>
+            <div className="header">
+              <button onClick={(e) => this.saveItem(e)}>Save</button>
+            </div>
+          </SplitPane>
+          <div>
+            <h2>Walmart Search Results</h2>
+          </div>
+        </SplitPane>
     </div>
-   )}
     </div>
+   }
+    </div>
+    </SplitPane>
+    </div>
+
     );
   }
 }

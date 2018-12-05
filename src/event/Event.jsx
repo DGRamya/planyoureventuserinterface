@@ -5,7 +5,7 @@ import "react-day-picker/lib/style.css";
 import "./Event.css";
 import { API_BASE_URL, ACCESS_TOKEN } from "../constants";
 import { createEvent } from "../util/APIUtils";
-import Alert from "react-s-alert"; 
+import Alert from "react-s-alert";
 import  { createMyEvent } from "../appActions/eventsActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
@@ -58,19 +58,18 @@ class Event extends Component {
   };
 
   handleDateChange(day) {
-    alert("handle" + day);
     this.setState({
       eventDate: day
     });
   }
 
-  render() { 
+  render() {
     const { selectedDay } = this.state;
     return (
-      <div style={{ backgroundColor: "white" }}>
+      <div className="rootDiv">
         <div className="headerContainer">
           <div className="header">
-            <label> Create Events </label>
+            <label> Create Event </label>
           </div>
         </div>
 

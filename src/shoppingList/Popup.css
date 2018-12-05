@@ -14,8 +14,17 @@
   position: absolute;
   left: 10%;
   right: 10%;
-  top: 10%;
+  top: 5%;
   bottom: 10%;
   margin: auto;
   background: white;
+}
+
+.popup .popup_inner .header button {
+    margin-top: 1px;
+    margin-right: 2px;
+    position:absolute;
+    top:0;
+    right:0;
+    width: 5%
 }

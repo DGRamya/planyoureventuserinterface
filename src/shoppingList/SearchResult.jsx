@@ -20,7 +20,7 @@ class SearchResults extends Component{
   render() {
     return (
       <div>
-      <SplitPane split="horizontal" defaultSize={600}>
+      <SplitPane split="horizontal" defaultSize={550}>
       <div>
         {this.props.entries.map((entry, index) =>
         index < 8 ?

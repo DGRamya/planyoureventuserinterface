@@ -15,17 +15,18 @@ class EventDetails extends Component {
     }
 
     render() {
-        console.log(this.props.event);
         return (
           <div className="root">
-              { <div>
+              <div>
                  <Sidebar eventId={this.props.event.eventid}/>
-              </div> }
-              <div className="childitem title">
-              {this.props.event.eventname}
-              </div> <br />
-              <div className="childitem content">
-                  Event Venue : {this.props.event.venue} <br /><br />
+              </div>
+              <div className="childitem">
+                  Event Name :
+                  &nbsp;<input type="text" value={this.props.event.eventname} style={{width: "200px", height: "30px"}}/> <br /><br />
+                  Event Venue :
+                  &nbsp;<input type="text" value={this.props.event.venue} style={{width: "200px", height: "30px"}}/> <br /><br />
+                  Event Date :
+                  &nbsp;<input type="text" value={this.props.event.eventdate} style={{width: "200px", height: "30px"}}/> <br /><br />
                   {/* Description : {event.description} <br /><br /> <br /><br /> */}
               </div>
           </div>
@@ -42,12 +43,12 @@ EventDetails.propTypes = {
     event: PropTypes.array.isRequired
     //newEvent: PropTypes.object
   };
-  
+
   const mapStatetoProps = state => ({
     event: state.events.event
     //newEvent: state.posts.item
   });
-  
+
   export default connect(
     mapStatetoProps,
     { getMyEventDetails }

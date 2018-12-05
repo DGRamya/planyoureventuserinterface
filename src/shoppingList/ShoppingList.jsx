@@ -30,22 +30,18 @@ class ShoppingList extends Component{
 }
 
 componentWillMount() {
-  //getEventDetails(this.props.match.params.eventId);
-
   var event = {};
   event["eventId"] = this.props.match.params.eventId;
 
   getEventDetails(event).then(response =>
-    {
+  {
       var list = response.shoppingList;
       var shopList = [];
       list.map((l) => shopList.push({text: l,
-        key: Date.now()}));
-    this.setState({event: response, items: shopList});
-    console.log("event -- "+JSON.stringify(this.state.event));
-    console.log("items -- "+JSON.stringify(this.state.items));}
-  );
+                                     key: Date.now()}));
 
+      this.setState({event: response, items: shopList});}
+  );
 }
 handleChange(event) {
     this.setState({value: event.target.value});
@@ -113,19 +109,21 @@ searchItem(e) {
 
 }
 saveItem(e) {
-  console.log("new items  == "+this.state.items);
   var newEvent = this.state.event;
+
   var list = this.state.items;
   var shopList = [];
   list.map((l) => shopList.push(l.text));
+
   newEvent["shoppingList"] = shopList;
-  console.log("newEvent  == "+newEvent);
+  
   this.setState({
     isSaved: true, 
   });
+
+  console.log("newEvent :: "+JSON.stringify(newEvent));
   updateEventDetails(newEvent).then(response =>
-    {
-      Alert.success("Shopping List saved successfully");}
+    {Alert.success("Shopping List saved successfully");}
   )
   .catch(error => {
     Alert.error("Shopping List not updated!!!");

@@ -5,18 +5,37 @@ import Alert from "react-s-alert";
 import {sendInvite} from "../util/APIUtils"
 import Sidebar from "../event/Sidebar";
 import SplitPane from "react-split-pane";
+import { getEventDetails, updateEventDetails } from "../util/APIUtils";
 
 class InviteGuests extends Component{
   constructor(props) {
   super(props);
   this.state = {
-  items: [],
-  isSaved: false,
-  emailContent: '',
-  emailSubject: '',
-};
+    items: [],
+    isSaved: false,
+    emailContent: '',
+    emailSubject: '',
+    event: {}
+  };
   this.addItem = this.addItem.bind(this);
   this.deleteItem = this.deleteItem.bind(this);
+}
+
+componentWillMount() {
+  var event = {};
+  event["eventId"] = this.props.match.params.eventId;
+
+  getEventDetails(event).then(response =>
+  {
+      var list = response.invitationList;
+      var guestList = [];
+      list.map((l) => guestList.push({text: l,
+                                      key: Date.now()}));
+
+      this.setState({event: response, items: guestList});
+      console.log("state event === "+JSON.stringify(this.state.event));  
+    }
+  );
 }
 
 addItem(e) {
@@ -46,9 +65,24 @@ deleteItem(key) {
   });
 }
 saveItem(e) {
-  Alert.success("Shopping List saved successfully");
+  var newEvent = this.state.event;
+
+  var list = this.state.items;
+  var guestList = [];
+  list.map((l) => guestList.push(l.text));
+
+  newEvent["invitationList"] = guestList;
+  
   this.setState({
-    isSaved: true
+    isSaved: true, 
+  });
+
+  console.log("newEvent :: "+JSON.stringify(newEvent));
+  updateEventDetails(newEvent).then(response =>
+    {Alert.success("Invitation List saved successfully");}
+  )
+  .catch(error => {
+    Alert.error("Invitation List not updated!!!");
   });
 
 }

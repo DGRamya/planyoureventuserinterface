@@ -50,6 +50,10 @@ button {
   font-size: 2rem;
   margin-left: 2%;
 }
+
+.guestTable td{
+  margin-right: 25%;
+}
 .thelist2{
   display: inline-block;
  vertical-align: text-top;

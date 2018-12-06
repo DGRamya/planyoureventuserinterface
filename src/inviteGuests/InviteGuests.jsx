@@ -61,10 +61,9 @@ sendInvite(e) {
        email["emailContent"] = this.state.emailContent;
        email["emailSubject"] = this.state.emailSubject;
 
-       console.log(email);
       sendInvite(email)
         .then(response => {
-          console.log(JSON.stringify(response));
+          Alert.success(response.message);
         })
         .catch(error => {
           Alert.error(

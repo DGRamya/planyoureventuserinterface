@@ -106,12 +106,12 @@ saveItem(e) {
     console.log("In shoppinglist check 2" +  JSON.stringify(this.props.event));
     return (
 
-  <div style={{backgroundImage:'url(' + require('../img/background3.jpg') + ')'}}>
+  <div>
   <SplitPane split="vertical" defaultSize={200}>
       <div className="sidebarDiv">
        <Sidebar/>
       </div>
-    <div className="rootDiv">
+    <div>
    { !isSaved ?
       <div className="childitemDiv">
       <div className="shoppingListMain">
@@ -137,7 +137,7 @@ saveItem(e) {
 
         <SplitPane split="vertical" defaultSize={500}>
           <SplitPane split="horizontal" defaultSize={500}>
-            <div>
+            <div className="shoppingcontainer">
               <h2>Shopping List</h2>
               <ShoppingListItems entries={this.state.items} delete={this.deleteItem}></ShoppingListItems>
             </div>

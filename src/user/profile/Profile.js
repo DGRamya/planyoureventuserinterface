@@ -12,7 +12,7 @@ class Profile extends Component {
                 <div className="container">
                     <div className="profile-info">
                         <div className="profile-avatar">
-                            { 
+                            {
                                 this.props.currentUser.imageUrl ? (
                                     <img src={this.props.currentUser.imageUrl} alt={this.props.currentUser.name}/>
                                 ) : (
@@ -27,7 +27,7 @@ class Profile extends Component {
                            <p className="profile-email">{this.props.currentUser.email}</p>
                         </div>
                     </div>
-                </div>    
+                </div>
             </div>
         );
     }

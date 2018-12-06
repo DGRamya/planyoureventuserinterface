@@ -41,18 +41,6 @@ class Event extends Component {
     console.log("printing the event data" + JSON.stringify(eventData));
     const eventRequest = Object.assign({}, eventData);
 
-    // createEvent(eventRequest)
-    //   .then(response => {
-    //     Alert.success("Event created successfully!");
-    //     this.props.history.push("/");
-    //   })
-    //   .catch(error => {
-    //     Alert.error("create event page Please try again!");
-    //   });
-    // event.target.reset();
-
-    // call action
-    //this.props.deleteMyEvent(this.props.eventId);
     this.props.createMyEvent(eventRequest);
     Alert.success("Event created successfully!");
   };
@@ -66,48 +54,57 @@ class Event extends Component {
   render() {
     const { selectedDay } = this.state;
     return (
-      <div className="rootDiv">
-        <div className="headerContainer">
-          <div className="header">
-            <label> Create Event </label>
-          </div>
+      <div className="login-container">
+        <div className="container">
+          <h1 className="login-title">Create Event</h1>
+          <form onSubmit={this.handleSubmit}>
+            <div className="form-item">
+              <input
+                type="text"
+                name="eventName"
+                ref="eventname"
+                className="form-control"
+                placeholder="Event Name"
+                value={this.state.name}
+                onChange={this.handleInputChange}
+                required
+              />
+            </div>
+            <div className="form-item">
+              <input
+                type="text"
+                name="eventVenue"
+                ref="eventvenue"
+                className="form-control"
+                placeholder="Event Venue"
+                value={this.state.email}
+                onChange={this.handleInputChange}
+                required
+              />
+            </div>
+            <div className="form-item">
+              <input
+                type="text"
+                name="eventDesc"
+                className="form-control"
+                placeholder="Event Description"
+                value={this.state.email}
+                onChange={this.handleInputChange}
+              />
+            </div>
+            <div className="form-item">
+              <DayPickerInput inputProps={{ style: { width: 200, height: 50 } }} onDayChange={this.handleDateChange} />
+            </div>
+            <div className="form-item">
+              <button type="submit">
+                Save
+              </button>
+            </div>
+          </form>
+
         </div>
-
-        <form onSubmit={this.handleSubmit}>
-          <div className="container">
-            <div className="child">
-              <label>Event Name</label>
-            </div>
-            <div className="child">
-              <input type="text" required ref="eventname" />
-            </div>
-          </div>
-
-          <div className="container">
-            <div className="child">
-              <label>Event Venue</label>
-            </div>
-            <div className="child">
-              <input type="text" required ref="eventvenue" />
-            </div>
-          </div>
-
-          <div className="container">
-            <div className="child">
-              <label>Date</label>
-            </div>
-            <div className="child">
-              <DayPickerInput onDayChange={this.handleDateChange} />
-            </div>
-          </div>
-
-          <div className="container">
-            <div className="submitButton">
-              <button>Submit</button>
-            </div>
-          </div>
-        </form>
       </div>
+
     );
   }
 }

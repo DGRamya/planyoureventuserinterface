@@ -137,13 +137,6 @@ class App extends Component {
               component={EventDetails}
             />
 
-            {/* <PrivateRoute
-              path="/shoppinglist/:list"
-              authenticated={this.state.authenticated}
-              currentUser={this.state.currentUser}
-              component={ShoppingList}
-            />  */}
-
             <Route
               exact
               path="/login"

@@ -1,11 +1,14 @@
-.rootDiv{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-  align-items: stretch;
-  height: 900px;
-  background-color: #11ffee00;
+
+.shoppingcontaine {
+    background-color: transparent;
+    box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
+    border-radius: 2px;
+    width: 500px;
+    display: inline-block;
+    margin-top: 30px;
+    vertical-align: middle;
+    position: relative;
+    padding: 35px;
 }
 
 .sidebarDiv{
@@ -18,7 +21,6 @@
   display: inline-block;
   align-content: center;
   justify-content: left;
-  /* background-color: aquamarine; */
   width: 70%;
 }
 
@@ -88,7 +90,6 @@
 }
 .shoppingListMain .theList .theList2 li {
   color: #333;
-  background-color: rgba(255,255,255,.5);
    padding: 2%;
    margin-bottom: 2%;
   border-radius: 3%;

@@ -96,6 +96,14 @@ export function getEventDetails(detailsRequest){
   });
 }
 
+export function updateEventDetails(eventRequest) {
+  return request({
+    url: API_BASE_URL + "/events/myevents/update",
+    method: "POST",
+    body: JSON.stringify(eventRequest)
+  });
+}
+
 export function deleteEvent(deleteRequest) {
   console.log(" deleteRequest :: " + JSON.stringify(deleteRequest));
   return request({

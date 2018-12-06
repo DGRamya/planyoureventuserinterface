@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { faStroopwafel } from "@fortawesome/free-solid-svg-icons";
+import SideButton from "./SideButton";
 import "./navBar.css";
 library.add(faStroopwafel);
 
@@ -11,79 +12,26 @@ class Sidebar extends Component {
   render() {
     return (
       <React.Fragment>
-        <div style={{ display: "flex" }}>
-          <div
-            style={{
-              padding: "20px",
-              width: "200%",
-              background: "#2F363A",
-              
-              marginTop: "-24px",
-              minheight: "100%"
-            }}
-          >
-            <div className="sidebar-header">
-              {/* <img
-                className="rounded-circle"
-                src={user.avatar}
-                style={{ width: "100px", marginLeft: "25px" }}
-              /> */}
-              <p className="lead" align="center">
-                <b>
-                  {" "}
-                  Welcome <br />
-                </b>
-              </p>
-            </div>
+        <div style={{ display: "flex", width: "180px"}}>
+          <div style={{paddingLeft: "20px",
+                       width: "180px",
+                       background: "#2F363A",
+                       height: "900px"}}>
 
-            <ul className="nav flex-column">
-              <li className="nav-item">
-                <a
-                  className="nav-link active"
-                  href={"/eventdetails/"+this.props.eventId}  
-                  style={{ color: "white" }}
-                >
-                  <i className="fas fa-home" />
-                  &nbsp;Details
-                </a>
-              </li>
+              <SideButton buttonText="Details"
+                             buttonLink={"/eventdetails/"+this.props.eventId}
+                             style={{width: "50px"}}/>
+              <SideButton buttonText="Shopping"
+                             buttonLink={"/shoppinglist/"+this.props.eventId}
+                             style={{width: "50px"}}/>
+              <SideButton buttonText="Invite"
+                             buttonLink={"/inviteGuests/"+this.props.eventId}
+                             style={{width: "50px"}}/>
 
-              <li className="nav-item">
-                <a
-                  href="/shoppinglist"
-                  className="nav-link active"
-                  style={{ color: "white" }}
-                >
-                  <i className="fas fa-user-ninja" />
-                  &nbsp;Shopping List
-                </a>
-              </li>
-              <li className="nav-item">
-                <a
-                  href="/todolist"
-                  className="nav-link active"
-                  style={{ color: "white" }}
-                >
-                  <i className="fas fa-search" />
-                  &nbsp;ToDo List
-                </a>
-              </li>
-              <li className="nav-item">
-                <a
-                  href="/guestlist"
-                  className="nav-link active"
-                  style={{ color: "white" }}
-                >
-                  <i className="fas fa-envelope-square" />
-                  &nbsp;Invitation List
-                </a>
-              </li>
-
-              
-            </ul>
           </div>
         </div>
       </React.Fragment>
+
     );
   }
 }

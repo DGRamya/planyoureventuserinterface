@@ -24,6 +24,7 @@ import "react-s-alert/dist/s-alert-css-effects/slide.css";
 import "./App.css";
 import MyEvents from "../event/MyEvents";
 
+
 //redux changes
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
@@ -80,9 +81,10 @@ class App extends Component {
       return <LoadingIndicator />;
     }
 
+
     return (
     <Provider store={store}>
-      <div className="app">
+      <div className="app" style={{backgroundImage: 'url(' + require('../img/background3.jpg') + ')'}}>
         <div className="app-top-box">
           <AppHeader
             authenticated={this.state.authenticated}
@@ -114,14 +116,14 @@ class App extends Component {
             />
 
               <PrivateRoute
-               path="/shoppingList"
+               path="/shoppingList/:eventId"
                authenticated={this.state.authenticated}
                currentUser={this.state.currentUser}
                component={ShoppingList}
              />
 
              <PrivateRoute
-              path="/inviteGuests"
+              path="/inviteGuests/:eventId"
               authenticated={this.state.authenticated}
               currentUser={this.state.currentUser}
               component={InviteGuests}

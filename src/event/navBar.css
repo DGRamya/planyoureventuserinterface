@@ -1,11 +1,21 @@
 li.nav-item:hover{
     font-size: 125%;
  }
- 
+
  p.lead{
      color: white;
- 
+
  }
  li.nav-item{
      color: #f17070;
  }
+
+ .button1 {
+    padding: 1%;
+    font-size: 1rem;
+    margin: 1%;
+    background-color: #0066FF;
+    color: #FFF;
+    border: 2px solid #0066FF;
+    width: 10%;
+  }

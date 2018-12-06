@@ -9,7 +9,8 @@ import SearchResults from "./SearchResult";
 import Sidebar from "../event/Sidebar";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import  { getMyEventDetails } from "../appActions/eventsActions";
+import { getEventDetails, updateEventDetails } from "../util/APIUtils";
+
 
 class ShoppingList extends Component{
   constructor(props) {
@@ -19,7 +20,8 @@ class ShoppingList extends Component{
   shoppingitems: [{},{},{},{},{}],
   isSaved: false,
   value: "Relevance",
-  numItems: 10
+  numItems: 10,
+  event: {}
 };
   this.addItem = this.addItem.bind(this);
   this.deleteItem = this.deleteItem.bind(this);
@@ -27,6 +29,20 @@ class ShoppingList extends Component{
   this.handleInputChange = this.handleInputChange.bind(this);
 }
 
+componentWillMount() {
+  var event = {};
+  event["eventId"] = this.props.match.params.eventId;
+
+  getEventDetails(event).then(response =>
+  {
+      var list = response.shoppingList;
+      var shopList = [];
+      list.map((l) => shopList.push({text: l,
+                                     key: Date.now()}));
+
+      this.setState({event: response, items: shopList});}
+  );
+}
 handleChange(event) {
     this.setState({value: event.target.value});
     console.log("drop down seleted", this.state.value);
@@ -63,7 +79,7 @@ deleteItem(key) {
   var filteredItems = this.state.items.filter(function (item) {
     return (item.key !== key);
   });
-
+ 
   this.setState({
     items: filteredItems
   });
@@ -93,11 +109,25 @@ searchItem(e) {
 
 }
 saveItem(e) {
-  Alert.success("Shopping List saved successfully");
+  var newEvent = this.state.event;
+
+  var list = this.state.items;
+  var shopList = [];
+  list.map((l) => shopList.push(l.text));
+
+  newEvent["shoppingList"] = shopList;
+  
   this.setState({
-    isSaved: true
+    isSaved: true, 
   });
 
+  console.log("newEvent :: "+JSON.stringify(newEvent));
+  updateEventDetails(newEvent).then(response =>
+    {Alert.success("Shopping List saved successfully");}
+  )
+  .catch(error => {
+    Alert.error("Shopping List not updated!!!");
+  });
 }
 
   render() {
@@ -105,17 +135,21 @@ saveItem(e) {
     console.log("In shoppinglist check 2" +  JSON.stringify(this.props.event));
     return (
 
-  <div>
-  { <div>
-     <Sidebar/>
-  </div> }
-   {!isSaved ? (
+  <div style={{backgroundImage:'url(' + require('../img/background3.jpg') + ')'}}>
+  <SplitPane split="vertical" defaultSize={200}>
+      <div className="sidebarDiv">
+       <Sidebar eventId={this.props.match.params.eventId}/>
+      </div>
+    <div className="rootDiv">
+   { !isSaved ?
+      <div className="childitemDiv">
       <div className="shoppingListMain">
         <div className="header">
-            <input ref={(a) => this._inputElement = a} placeholder="Add an item..">
-            </input>
+            <input ref={(a) => this._inputElement = a} placeholder="Add an item.."></input>
             <button onClick={(e) => this.addItem(e)}>add</button>
             <button onClick={(e) => this.searchItem(e)}>search</button>
+        </div>
+        <div className="header1">
             <select value={this.state.value} onChange={this.handleChange}>
               <option value="relevance">Relevance</option>
               <option value="price">Price</option>
@@ -124,57 +158,61 @@ saveItem(e) {
               <option value="customerRating">CustomerRating</option>
               <option value="new">New</option>
             </select>
-            <label> No Items
+            <label> Number of Items:
             <input name="numItems" type="number" value={this.state.numItems} onChange={this.handleInputChange} />
             </label>
         </div>
 
-        <SplitPane split="vertical" defaultSize={650}>
-        <SplitPane split="horizontal" defaultSize={350}>
-         <div>
-            <h2>Shopping List</h2>
-            <ShoppingListItems entries={this.state.items} delete={this.deleteItem}></ShoppingListItems>
+
+        <SplitPane split="vertical" defaultSize={500}>
+          <SplitPane split="horizontal" defaultSize={300}>
+            <div>
+              <h2>Shopping List</h2>
+              <ShoppingListItems entries={this.state.items} delete={this.deleteItem}></ShoppingListItems>
+            </div>
+            <div className="header">
+              <button onClick={(e) => this.saveItem(e)}>Save</button>
+            </div>
+          </SplitPane>
+          <div>
+            <div><h2>Walmart Search</h2></div>
+            <div>
+            <SearchResults entries={this.state.shoppingitems}/>
+            </div>
           </div>
-         <div className="header">
-          <button onClick={(e) => this.saveItem(e)}>Save</button>
-        </div>
-     </SplitPane>
-
-
-     <div>
-
-        <SearchResults entries={this.state.shoppingitems}/>
+        </SplitPane>
      </div>
-     </SplitPane>
      </div>
-   ):(
+   :
+     <div className="childitemDiv">
      <div className="shoppingListMain">
-       <div className="header">
-           <input ref={(a) => this._inputElement = a} placeholder="Add an item..">
-           </input>
+        <div className="header">
+           <input ref={(a) => this._inputElement = a} placeholder="Add an item.."></input>
            <button onClick={(e) => this.addItem(e)}>add</button>
            <button onClick={(e) => this.searchItem(e)}>search</button>
-
-       </div>
-
-       <SplitPane split="vertical" defaultSize={650}>
-       <SplitPane split="horizontal" defaultSize={350}>
-        <div>
-          <h2>Shopping List</h2>
-          <ShoppingListItems entries={this.state.items} delete={this.deleteItem}></ShoppingListItems>
         </div>
-        <div className="header">
-         <button onClick={(e) => this.saveItem(e)}>Save</button>
-       </div>
-    </SplitPane>
-        <div>
-          <h2>Walmart Search Results</h2>
-        </div>
-    </SplitPane>
 
+        <SplitPane split="vertical" defaultSize={650}>
+          <SplitPane split="horizontal" defaultSize={350}>
+            <div>
+              <h2>Shopping List</h2>
+              <ShoppingListItems entries={this.state.items} delete={this.deleteItem}></ShoppingListItems>
+            </div>
+            <div className="header">
+              <button onClick={(e) => this.saveItem(e)}>Save</button>
+            </div>
+          </SplitPane>
+          <div>
+            <h2>Walmart Search Results</h2>
+          </div>
+        </SplitPane>
     </div>
-   )}
     </div>
+   }
+    </div>
+    </SplitPane>
+    </div>
+
     );
   }
 }

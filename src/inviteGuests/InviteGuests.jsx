@@ -6,6 +6,13 @@ import {sendInvite} from "../util/APIUtils"
 import Sidebar from "../event/Sidebar";
 import SplitPane from "react-split-pane";
 import { getEventDetails, updateEventDetails } from "../util/APIUtils";
+import Checkbox from "../common/Checkbox";
+
+const new_items = [
+  'a@iu.edu',
+  'b@iu.edu',
+  'c@iu.edu',
+];
 
 class InviteGuests extends Component{
   constructor(props) {
@@ -18,12 +25,15 @@ class InviteGuests extends Component{
     emailVenue: '',
     emailDate: '',
     event: {},
+    guestList: [],
   };
   this.addItem = this.addItem.bind(this);
   this.deleteItem = this.deleteItem.bind(this);
 }
 
 componentWillMount() {
+  this.selectedCheckboxes = new Set();
+
   var event = {};
   event["eventId"] = this.props.match.params.eventId;
 
@@ -38,10 +48,18 @@ componentWillMount() {
         guestList.push({text: id, key: Date.now(), isChecked: value})
       })
 
-      this.setState({event: response, items: guestList, emailVenue: response.venue, emailDate: response.eventdate});
+      this.setState({event: response, items: guestList, emailVenue: response.venue, emailDate: response.eventdate, guestList:guestList});
       console.log("state event === "+JSON.stringify(this.state.event));
     }
   )
+}
+
+toggleCheckbox = label => {
+  if (this.selectedCheckboxes.has(label)) {
+    this.selectedCheckboxes.delete(label);
+  } else {
+    this.selectedCheckboxes.add(label);
+  }
 }
 
 addItem(e) {
@@ -94,8 +112,25 @@ saveItem(e) {
   .catch(error => {
     Alert.error("Invitation List not updated!!!");
   });
-
+  for (const checkbox of this.selectedCheckboxes) {
+      console.log(checkbox, 'is selected.');
+    }
 }
+createCheckbox = label => (
+  <Checkbox
+    label={label}
+    handleCheckboxChange={this.toggleCheckbox}
+    key={label}
+  />
+)
+
+createCheckboxes = () => {(
+    new_items.map(this.createCheckbox)
+)
+console.log('new items :: ' + new_items)
+};
+
+
 sendInvite(e) {
   console.log("sendInvite called ");
        var email = {};
@@ -148,6 +183,7 @@ sendInvite(e) {
             <input type = "email" ref={(a) => this._inputElement = a} placeholder="Enter email id">
             </input>
             <button type="submit">add</button>
+             {this.createCheckboxes()}
           </form>
         </div>
         <SplitPane split="vertical" defaultSize={750}>

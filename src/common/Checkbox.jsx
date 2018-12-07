@@ -1,5 +1,5 @@
-import React, { Component, PropTypes } from 'react';
-
+import React, { Component } from 'react';
+import PropTypes from "prop-types";
 class Checkbox extends Component {
   state = {
     isChecked: false,
@@ -20,7 +20,7 @@ class Checkbox extends Component {
   render() {
     const { label } = this.props;
     const { isChecked } = this.state;
-
+    console.log('in checkbox');
     return (
       <div className="checkbox">
         <label>

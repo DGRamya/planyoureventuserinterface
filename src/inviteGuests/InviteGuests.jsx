@@ -15,7 +15,9 @@ class InviteGuests extends Component{
     isSaved: false,
     emailContent: '',
     emailSubject: '',
-    event: {}
+    emailVenue: '',
+    emailDate: '',
+    event: {},
   };
   this.addItem = this.addItem.bind(this);
   this.deleteItem = this.deleteItem.bind(this);
@@ -27,22 +29,27 @@ componentWillMount() {
 
   getEventDetails(event).then(response =>
   {
+      console.log('response :: ' + JSON.stringify(response));
       var list = response.invitationList;
+      console.log('getEventDetails :: ' + JSON.stringify(list));
       var guestList = [];
-      list.map((l) => guestList.push({text: l,
-                                      key: Date.now()}));
 
-      this.setState({event: response, items: guestList});
-      console.log("state event === "+JSON.stringify(this.state.event));  
+      Object.entries(list).map(([id,value])=>{
+        guestList.push({text: id, key: Date.now(), isChecked: value})
+      })
+
+      this.setState({event: response, items: guestList, emailVenue: response.venue, emailDate: response.eventdate});
+      console.log("state event === "+JSON.stringify(this.state.event));
     }
-  );
+  )
 }
 
 addItem(e) {
   if (this._inputElement.value !== "") {
     var newItem = {
       text: this._inputElement.value,
-      key: Date.now()
+      key: Date.now(),
+      isChecked: false
     };
 
     this.setState((prevState) => {
@@ -66,15 +73,18 @@ deleteItem(key) {
 }
 saveItem(e) {
   var newEvent = this.state.event;
-
+  console.log('save newEvent :: ' + JSON.stringify(newEvent));
   var list = this.state.items;
+  console.log('save list :: ' + JSON.stringify(list));
+
   var guestList = [];
+  var newGuestList = {}
   list.map((l) => guestList.push(l.text));
 
   newEvent["invitationList"] = guestList;
-  
+
   this.setState({
-    isSaved: true, 
+    isSaved: true,
   });
 
   console.log("newEvent :: "+JSON.stringify(newEvent));
@@ -95,15 +105,19 @@ sendInvite(e) {
        email["emailId"] = emailList;
        email["emailContent"] = this.state.emailContent;
        email["emailSubject"] = this.state.emailSubject;
-
+       email["emailVenue"] = this.state.emailVenue;
+       email["emailDate"] = this.state.emailDate;
        console.log(email);
       sendInvite(email)
         .then(response => {
           console.log(JSON.stringify(response));
-        })
-        .catch(error => {
           Alert.success(
               "Email Sent successfully"
+          );
+        })
+        .catch(error => {
+          Alert.error(
+              "Email Sending Error"
           );
         });
   }

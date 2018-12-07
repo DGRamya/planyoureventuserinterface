@@ -32,7 +32,7 @@ class ShoppingList extends Component{
 componentWillMount() {
   var event = {};
   event["eventId"] = this.props.match.params.eventId;
-
+  console.log("this.props.match.params :: " + JSON.stringify(event));
   getEventDetails(event).then(response =>
   {
       var list = response.shoppingList;
@@ -79,7 +79,7 @@ deleteItem(key) {
   var filteredItems = this.state.items.filter(function (item) {
     return (item.key !== key);
   });
- 
+
   this.setState({
     items: filteredItems
   });
@@ -116,9 +116,9 @@ saveItem(e) {
   list.map((l) => shopList.push(l.text));
 
   newEvent["shoppingList"] = shopList;
-  
+
   this.setState({
-    isSaved: true, 
+    isSaved: true,
   });
 
   console.log("newEvent :: "+JSON.stringify(newEvent));

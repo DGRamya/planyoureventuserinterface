@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../shoppingList/ShoppingList.css";
 
-class GuestsList extends Component{
+class CheckList extends Component{
   constructor(props) {
     super(props);
     this.createTasks = this.createTasks.bind(this);
@@ -32,4 +32,4 @@ return <tr><div className="theList2">
   }
 }
 
-export default GuestsList;
+export default CheckList;

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ShoppingListItems from "./ShoppingListItems";
+import CheckList from "../common/CheckList";
 import "./ShoppingList.css";
 import SplitPane from "react-split-pane";
 import {getShoppingSearch} from "../util/APIUtils"
@@ -108,6 +108,20 @@ searchItem(e) {
     });
 
 }
+
+handleCheckboxChange(key){
+  var filteredItems = this.state.items.filter(function (item) {
+    if(item.key == key){
+      item.isChecked = !item.isChecked;
+    }
+    return true;
+  });
+
+  this.setState({
+    items: filteredItems
+  });
+}
+
 saveItem(e) {
   var newEvent = this.state.event;
 
@@ -168,7 +182,8 @@ saveItem(e) {
           <SplitPane split="horizontal" defaultSize={300}>
             <div>
               <h2>Shopping List</h2>
-              <ShoppingListItems entries={this.state.items} delete={this.deleteItem}></ShoppingListItems>
+              <CheckList entries={this.state.items} delete={this.deleteItem}
+              handleCheckbox={this.handleCheckboxChange}></CheckList>
             </div>
             <div className="header">
               <button onClick={(e) => this.saveItem(e)}>Save</button>
@@ -196,7 +211,8 @@ saveItem(e) {
           <SplitPane split="horizontal" defaultSize={350}>
             <div>
               <h2>Shopping List</h2>
-              <ShoppingListItems entries={this.state.items} delete={this.deleteItem}></ShoppingListItems>
+              <CheckList entries={this.state.items} delete={this.deleteItem}
+              handleCheckbox={this.handleCheckboxChange}></CheckList>
             </div>
             <div className="header">
               <button onClick={(e) => this.saveItem(e)}>Save</button>

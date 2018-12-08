@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import GuestsList from "./GuestsList";
+import CheckList from "../common/CheckList";
 import "../shoppingList/ShoppingList.css";
 import Alert from "react-s-alert";
 import {sendInvite} from "../util/APIUtils"
@@ -37,7 +37,7 @@ componentWillMount() {
       var guestList = [];
 
       Object.entries(list).map(([id,value])=>{
-        guestList.push({text: id, key: Date.now(), isChecked: value})
+        guestList.push({text: id, key: id, isChecked: value})
       })
 
       this.setState({event: response, items: guestList, emailVenue: response.venue, emailDate: response.eventdate, guestList:guestList});
@@ -45,19 +45,11 @@ componentWillMount() {
   )
 }
 
-toggleCheckbox = label => {
-  if (this.selectedCheckboxes.has(label)) {
-    this.selectedCheckboxes.delete(label);
-  } else {
-    this.selectedCheckboxes.add(label);
-  }
-}
-
 addItem(e) {
   if (this._inputElement.value !== "") {
     var newItem = {
       text: this._inputElement.value,
-      key: Date.now(),
+      key: this._inputElement.value,
       isChecked: false
     };
 
@@ -175,7 +167,7 @@ sendInvite(e) {
         </div>
         <SplitPane split="vertical" defaultSize={750}>
           <div className="leftDiv">
-          <GuestsList entries={this.state.items}
+          <CheckList entries={this.state.items}
           delete={this.deleteItem} handleCheckbox={this.handleCheckboxChange}/>
           <div className="header">
            <button onClick={(e) => this.saveItem(e)}>Save</button>

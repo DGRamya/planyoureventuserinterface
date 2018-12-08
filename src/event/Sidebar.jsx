@@ -12,26 +12,38 @@ class Sidebar extends Component {
   render() {
     return (
       <React.Fragment>
-        <div style={{ display: "flex", width: "180px"}}>
-          <div style={{paddingLeft: "20px",
-                       width: "180px",
-                       background: "#2F363A",
-                       height: "900px"}}>
-
-              <SideButton buttonText="Details"
-                             buttonLink={"/eventdetails/"+this.props.eventId}
-                             style={{width: "50px"}}/>
-              <SideButton buttonText="Shopping"
-                             buttonLink={"/shoppinglist/"+this.props.eventId}
-                             style={{width: "50px"}}/>
-              <SideButton buttonText="Invite"
-                             buttonLink={"/inviteGuests/"+this.props.eventId}
-                             style={{width: "50px"}}/>
-
+        <div style={{ display: "flex", width: "180px" }}>
+          <div
+            style={{
+              paddingLeft: "20px",
+              width: "180px",
+              background: "#2F363A",
+              height: "900px"
+            }}
+          >
+            <SideButton
+              buttonText="Details"
+              buttonLink={"/eventdetails/" + this.props.eventId}
+              style={{ width: "50px" }}
+            />
+            <SideButton
+              buttonText="Shopping"
+              buttonLink={"/shoppinglist/" + this.props.eventId}
+              style={{ width: "50px" }}
+            />
+            <SideButton
+              buttonText="Invite"
+              buttonLink={"/inviteGuests/" + this.props.eventId}
+              style={{ width: "50px" }}
+            />
+            <SideButton
+              buttonText="Organizers"
+              buttonLink={"/multipleOrganizer/" + this.props.eventId}
+              style={{ width: "60px" }}
+            />
           </div>
         </div>
       </React.Fragment>
-
     );
   }
 }

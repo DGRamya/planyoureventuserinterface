@@ -27,6 +27,9 @@ class Sidebar extends Component {
               <SideButton buttonText="Invite"
                              buttonLink={"/inviteGuests/"+this.props.eventId}
                              style={{width: "50px"}}/>
+              <SideButton buttonText="ToDo"
+                             buttonLink={"/todoList/"+this.props.eventId}
+                             style={{width: "50px"}}/>               
 
           </div>
         </div>

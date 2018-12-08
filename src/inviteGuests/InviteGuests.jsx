@@ -18,7 +18,6 @@ class InviteGuests extends Component{
     emailVenue: '',
     emailDate: '',
     event: {},
-    guestList: [],
   };
   this.addItem = this.addItem.bind(this);
   this.deleteItem = this.deleteItem.bind(this);
@@ -40,7 +39,7 @@ componentWillMount() {
         guestList.push({text: id, key: id, isChecked: value})
       })
 
-      this.setState({event: response, items: guestList, emailVenue: response.venue, emailDate: response.eventdate, guestList:guestList});
+      this.setState({event: response, items: guestList, emailVenue: response.venue, emailDate: response.eventdate});
     }
   )
 }
@@ -90,13 +89,10 @@ saveItem(e) {
   var newEvent = this.state.event;
   var list = this.state.items;
 
-  var guestList = [];
   var newGuestList = {}
   list.map((l) => {
     newGuestList[l.text] = l.isChecked
-    guestList.push(l.text)
   });
-  console.log('newGuestList :: ' + JSON.stringify(newGuestList));
   newEvent["invitationList"] = newGuestList;
 
   this.setState({

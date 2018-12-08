@@ -12,6 +12,7 @@ class Sidebar extends Component {
   render() {
     return (
       <React.Fragment>
+
         <div style={{ display: "flex", width: "180px"}}>
           <div style={{paddingLeft: "20px",
                        width: "180px",
@@ -29,12 +30,15 @@ class Sidebar extends Component {
                              style={{width: "50px"}}/>
               <SideButton buttonText="ToDo"
                              buttonLink={"/todoList/"+this.props.eventId}
-                             style={{width: "50px"}}/>               
+                             style={{width: "50px"}}/>  
+              <SideButton buttonText="Organizers"
+                          buttonLink={"/multipleOrganizer/" + this.props.eventId}
+                          style={{ width: "60px" }} />                            
+
 
           </div>
         </div>
       </React.Fragment>
-
     );
   }
 }

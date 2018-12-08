@@ -11,6 +11,7 @@ import NotFound from "../common/NotFound";
 import LoadingIndicator from "../common/LoadingIndicator";
 import ShoppingList from "../shoppingList/ShoppingList";
 import InviteGuests from "../inviteGuests/InviteGuests";
+import TodoList from "../todo/TodoList";
 import { getCurrentUser } from "../util/APIUtils";
 import { ACCESS_TOKEN } from "../constants";
 import PrivateRoute from "../common/PrivateRoute";
@@ -129,6 +130,12 @@ class App extends Component {
               component={InviteGuests}
             />
 
+            <PrivateRoute
+              path="/todoList/:eventId"
+              authenticated={this.state.authenticated}
+              currentUser={this.state.currentUser}
+              component={TodoList}
+            />
 
            <PrivateRoute
               path="/eventdetails/:eventId"

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ShoppingListItems from "./ShoppingListItems";
+import CheckList from "../common/CheckList";
 import "./ShoppingList.css";
 import SplitPane from "react-split-pane";
 import {getShoppingSearch} from "../util/APIUtils"
@@ -27,18 +27,21 @@ class ShoppingList extends Component{
   this.deleteItem = this.deleteItem.bind(this);
   this.handleChange = this.handleChange.bind(this);
   this.handleInputChange = this.handleInputChange.bind(this);
+  this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
+
 }
 
 componentWillMount() {
   var event = {};
   event["eventId"] = this.props.match.params.eventId;
-
+  console.log("this.props.match.params :: " + JSON.stringify(event));
   getEventDetails(event).then(response =>
   {
       var list = response.shoppingList;
       var shopList = [];
-      list.map((l) => shopList.push({text: l,
-                                     key: Date.now()}));
+      Object.entries(list).map(([id,value])=>{
+        shopList.push({text: id, key: id, isChecked: value})
+      })
 
       this.setState({event: response, items: shopList});}
   );
@@ -62,7 +65,8 @@ addItem(e) {
   if (this._inputElement.value !== "") {
     var newItem = {
       text: this._inputElement.value,
-      key: Date.now()
+      key: this._inputElement.value,
+      isChecked: false
     };
 
     this.setState((prevState) => {
@@ -79,7 +83,7 @@ deleteItem(key) {
   var filteredItems = this.state.items.filter(function (item) {
     return (item.key !== key);
   });
- 
+
   this.setState({
     items: filteredItems
   });
@@ -108,17 +112,32 @@ searchItem(e) {
     });
 
 }
+
+handleCheckboxChange(key){
+  var filteredItems = this.state.items.filter(function (item) {
+    if(item.key == key){
+      item.isChecked = !item.isChecked;
+    }
+    return true;
+  });
+
+  this.setState({
+    items: filteredItems
+  });
+}
+
 saveItem(e) {
   var newEvent = this.state.event;
 
   var list = this.state.items;
-  var shopList = [];
-  list.map((l) => shopList.push(l.text));
-
+  var shopList = {};
+  list.map((l) => {
+    shopList[l.text] = l.isChecked
+  });
   newEvent["shoppingList"] = shopList;
-  
+
   this.setState({
-    isSaved: true, 
+    isSaved: true,
   });
 
   console.log("newEvent :: "+JSON.stringify(newEvent));
@@ -168,7 +187,8 @@ saveItem(e) {
           <SplitPane split="horizontal" defaultSize={300}>
             <div>
               <h2>Shopping List</h2>
-              <ShoppingListItems entries={this.state.items} delete={this.deleteItem}></ShoppingListItems>
+              <CheckList entries={this.state.items} delete={this.deleteItem}
+              handleCheckbox={this.handleCheckboxChange}></CheckList>
             </div>
             <div className="header">
               <button onClick={(e) => this.saveItem(e)}>Save</button>
@@ -196,7 +216,8 @@ saveItem(e) {
           <SplitPane split="horizontal" defaultSize={350}>
             <div>
               <h2>Shopping List</h2>
-              <ShoppingListItems entries={this.state.items} delete={this.deleteItem}></ShoppingListItems>
+              <CheckList entries={this.state.items} delete={this.deleteItem}
+              handleCheckbox={this.handleCheckboxChange}></CheckList>
             </div>
             <div className="header">
               <button onClick={(e) => this.saveItem(e)}>Save</button>

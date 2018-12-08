@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import GuestsList from "./GuestsList";
+import CheckList from "../common/CheckList";
 import "../shoppingList/ShoppingList.css";
 import Alert from "react-s-alert";
 import {sendInvite} from "../util/APIUtils"
@@ -15,13 +15,18 @@ class InviteGuests extends Component{
     isSaved: false,
     emailContent: '',
     emailSubject: '',
-    event: {}
+    emailVenue: '',
+    emailDate: '',
+    event: {},
   };
   this.addItem = this.addItem.bind(this);
   this.deleteItem = this.deleteItem.bind(this);
+  this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
+
 }
 
 componentWillMount() {
+
   var event = {};
   event["eventId"] = this.props.match.params.eventId;
 
@@ -29,20 +34,22 @@ componentWillMount() {
   {
       var list = response.invitationList;
       var guestList = [];
-      list.map((l) => guestList.push({text: l,
-                                      key: Date.now()}));
 
-      this.setState({event: response, items: guestList});
-      console.log("state event === "+JSON.stringify(this.state.event));  
+      Object.entries(list).map(([id,value])=>{
+        guestList.push({text: id, key: id, isChecked: value})
+      })
+
+      this.setState({event: response, items: guestList, emailVenue: response.venue, emailDate: response.eventdate});
     }
-  );
+  )
 }
 
 addItem(e) {
   if (this._inputElement.value !== "") {
     var newItem = {
       text: this._inputElement.value,
-      key: Date.now()
+      key: this._inputElement.value,
+      isChecked: false
     };
 
     this.setState((prevState) => {
@@ -64,46 +71,64 @@ deleteItem(key) {
     items: filteredItems
   });
 }
-saveItem(e) {
-  var newEvent = this.state.event;
 
-  var list = this.state.items;
-  var guestList = [];
-  list.map((l) => guestList.push(l.text));
-
-  newEvent["invitationList"] = guestList;
-  
-  this.setState({
-    isSaved: true, 
+handleCheckboxChange(key){
+  var filteredItems = this.state.items.filter(function (item) {
+    if(item.key == key){
+      item.isChecked = !item.isChecked;
+    }
+    return true;
   });
 
-  console.log("newEvent :: "+JSON.stringify(newEvent));
+  this.setState({
+    items: filteredItems
+  });
+}
+
+saveItem(e) {
+  var newEvent = this.state.event;
+  var list = this.state.items;
+
+  var newGuestList = {}
+  list.map((l) => {
+    newGuestList[l.text] = l.isChecked
+  });
+  newEvent["invitationList"] = newGuestList;
+
+  this.setState({
+    isSaved: true,
+  });
+  console.log('saving... :: ' + JSON.stringify(newEvent));
   updateEventDetails(newEvent).then(response =>
     {Alert.success("Invitation List saved successfully");}
   )
   .catch(error => {
     Alert.error("Invitation List not updated!!!");
   });
-
 }
+
 sendInvite(e) {
-  console.log("sendInvite called ");
        var email = {};
        var list = this.state.items;
        var emailList = [];
-       list.map((l) => emailList.push(l.text));
+       list.map((l) => {
+        if(l.isChecked)
+          emailList.push(l.text)
+       });
        email["emailId"] = emailList;
        email["emailContent"] = this.state.emailContent;
        email["emailSubject"] = this.state.emailSubject;
-
-       console.log(email);
+       email["emailVenue"] = this.state.emailVenue;
+       email["emailDate"] = this.state.emailDate;
       sendInvite(email)
         .then(response => {
-          console.log(JSON.stringify(response));
-        })
-        .catch(error => {
           Alert.success(
               "Email Sent successfully"
+          );
+        })
+        .catch(error => {
+          Alert.error(
+              "Email Sending Error"
           );
         });
   }
@@ -138,8 +163,8 @@ sendInvite(e) {
         </div>
         <SplitPane split="vertical" defaultSize={750}>
           <div className="leftDiv">
-          <GuestsList entries={this.state.items}
-          delete={this.deleteItem}/>
+          <CheckList entries={this.state.items}
+          delete={this.deleteItem} handleCheckbox={this.handleCheckboxChange}/>
           <div className="header">
            <button onClick={(e) => this.saveItem(e)}>Save</button>
            <button onClick={(e) => this.sendInvite(e)}>Send Invite</button>

@@ -44,6 +44,9 @@ class Event extends Component {
     this.props.createMyEvent(eventRequest);
     Alert.success("Event created successfully!");
     event.target.reset();
+    this.setState({
+      eventDate: ""
+    });
   };
 
   handleDateChange(day) {
@@ -94,7 +97,7 @@ class Event extends Component {
               />
             </div>
             <div className="form-item">
-              <DayPickerInput inputProps={{ style: { width: 200, height: 50 } }} onDayChange={this.handleDateChange} />
+              <DayPickerInput inputProps={{ style: { width: 200, height: 50 } }} onDayChange={this.handleDateChange} value={this.state.eventDate}/>
             </div>
             <div className="form-item">
               <button type="submit">

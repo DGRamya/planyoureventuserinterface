@@ -20,7 +20,6 @@ class SearchResults extends Component{
   render() {
     return (
       <div>
-      <SplitPane split="horizontal" defaultSize={600}>
       <div>
         {this.props.entries.map((entry, index) =>
         index < 4 ?
@@ -41,7 +40,6 @@ class SearchResults extends Component{
     <div className="header">
       <button onClick={this.togglePopup.bind(this)}>Show More</button>
     </div>
-    </SplitPane>
     {this.state.showPopup ?
           <Popup
             entries={this.props.entries}

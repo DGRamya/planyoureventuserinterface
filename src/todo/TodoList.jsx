@@ -115,16 +115,16 @@ class TodoList extends Component{
                 <button type="submit">add</button>
               </form>
             </div>
-            <SplitPane split="vertical" defaultSize={750}>
-              <div className="leftDiv">
+
+              <div className="list">
               <CheckList entries={this.state.items}
                          delete={this.deleteItem}
                          handleCheckbox={this.handleCheckboxChange}/>
-              <div className="header">
+              </div>
+              <div className="center">
                <button onClick={(e) => this.saveItem(e)}>Save</button>
+
               </div>
-              </div>
-            </SplitPane>
           </div>
           <div className="bottomDiv">
             <Bottombar eventId={this.props.match.params.eventId}/>

@@ -24,12 +24,15 @@
   margin-left: 30%;
 }
 
+.shoppingleftDiv{
+  width: 100%;
+  margin-left: 50%;
+}
+
 .childitemDiv {
-  display: inline-block;
-  align-content: center;
+
   justify-content: left;
   width: 100%;
-  margin-top: 0%;
 }
 
 .shoppingListMain .header input {
@@ -73,8 +76,8 @@
   margin-left: 2%;
 }
 .shoppingListMain .header button:hover {
-  background-color: #0066FF;
-  border: 1% solid #0066FF;
+  background-color: #2F363A;
+  border: 1% solid #2F363A;
   cursor: pointer;
 }
 .shoppingListMain .theList {
@@ -87,9 +90,10 @@
 .thelist2{
  vertical-align: text-top;
  margin: 0 auto;
+ display: inline-block;
 }
 .shoppingListMain .theList .theList2 input {
-  color: #333;
+  color: #FFF;
   background-color: rgba(255,255,255,.5);
   padding: 2%;
   margin-bottom: 2%;
@@ -98,7 +102,7 @@
   padding-left: 80%;
 }
 .shoppingListMain .theList .theList2 li {
-  color: #333;
+  color: #FFF;
    padding: 2%;
    margin-bottom: 2%;
   border-radius: 3%;
@@ -112,10 +116,11 @@ ul.theList {
 .leftDiv{
   width: 100%;
   margin-left: 50%;
+  margin-top: 5%;
 }
 .rightDiv {
   margin-left: 30%;
-  margin-top: 5%;
+  margin-top: 2%;
 }
 .rightDiv div {
 
@@ -141,13 +146,13 @@ ul.theList {
 }
 
 button {
- padding: 1%;
- font-size: 1rem;
- margin: 1%;
- background-color: #2F363A;
- color: #FFF;
- border: 2px solid #2F363A;
- width: 10%;
+  padding: 1%;
+  font-size: 1rem;
+  margin: 1%;
+  background-color: #2F363A;
+  color: #FFF;
+  border: 2px solid #2F363A;
+  width: auto;
 }
 
 .shoppingListMain .header2 input {
@@ -170,13 +175,36 @@ button {
 }
 
 .bottomDiv {
-  margin-top: 30%;
-  height: 10%;
+  position: fixed;
+  top: 725px;
+  height: 10px;
   width: 100%;
   background-color: #1863a0;
 }
 
-.header {
-  max-width: 100%;
-  margin: auto;
+.shoppingListMain .header {
+  margin-top: 5%;
+}
+
+.rightDiv label {
+    font-size: 1.3rem;
+    border: 1% solid #FFF;
+    width: 15%;
+    color: #FFF;
+    margin-left: 0%;
+  }
+
+.center button{
+  padding: 1%;
+  font-size: 1rem;
+  margin-top: 5%;
+  margin-left: 43%;
+  background-color: #2F363A;
+  color: #FFF;
+  border: 2px solid #2F363A;
+  width: 15%;
+}
+
+.list {
+  margin-left: 43%;
 }

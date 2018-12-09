@@ -129,7 +129,7 @@ class MultipleOrganizer extends Component {
               </form>
             </div>
 
-            <div className="leftDiv">
+            <div className="list">
               <CheckList
                 entries={this.state.items}
                 delete={this.deleteItem}
@@ -137,7 +137,7 @@ class MultipleOrganizer extends Component {
               />
             </div>
 
-            <div className="header">
+            <div className="center">
               <button onClick={e => this.multipleOrganizer(e)}>
                 Add Organizer
               </button>

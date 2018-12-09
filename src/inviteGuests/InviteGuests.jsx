@@ -166,12 +166,14 @@ sendInvite(e) {
           delete={this.deleteItem} handleCheckbox={this.handleCheckboxChange}/>
           <div className="header">
            <button onClick={(e) => this.saveItem(e)}>Save</button>
-           <button onClick={(e) => this.sendInvite(e)}>Send Invite</button>
+           <button onClick={(e) => this.sendInvite(e)}>Invite</button>
            </div>
            </div>
           <div className="rightDiv">
           <div>
+          <label>
           Send Customized Email Subject:
+          </label>
           </div>
           <div>
             <textarea placeholder="You are invited!" onChange={this.handleSubjectChange}>
@@ -179,7 +181,9 @@ sendInvite(e) {
             {/* </textarea> */}
           </div>
           <div>
+          <label>
           Send Customized Email Content:
+          </label>
           </div>
           <div>
             <textarea style={{height:"200px"}} placeholder="You are invited!" onChange={this.handleChange} />

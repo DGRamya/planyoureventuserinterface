@@ -10,8 +10,10 @@ class CheckList extends Component{
   createTasks(item) {
 return <tr><div className="theList2">
 <td><input type="checkbox" checked = {item.isChecked} onChange = {() => this.handleCheckbox(item.key)}/></td>
+<td>&nbsp;</td>
 <td><li key={item.key}> {item.text} </li></td>
-<td><button style = {{width:"100%", height:"60%"}} onClick={() => this.delete(item.key)} > - </button></td>
+<td>&nbsp;</td>
+<td><button style = {{width:"100%", height:"60%"}} onClick={() => this.delete(item.key)} > x </button></td>
               </div></tr>
   }
 

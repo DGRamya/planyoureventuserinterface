@@ -21,7 +21,7 @@ class Home extends Component {
               <div className="graf-circle" />
             </div>
           </div>
-          <h1 className="home-title">Planning Made Easy!!</h1>
+          <h1 className="home-title">Event Planning Made Easy!!</h1>
         </div>
       </div>
     );

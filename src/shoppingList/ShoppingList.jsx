@@ -159,11 +159,11 @@ saveItem(e) {
     <div style={{height:"900px"}}>
     <div className="childitemDiv">
     <div className="shoppingListMain">
-      <div className="header">
-          <input ref={(a) => this._inputElement = a} placeholder="Add an item.."></input>
-          <button onClick={(e) => this.addItem(e)}>add</button>
-          <button onClick={(e) => this.searchItem(e)}>search</button>
-      </div>
+    <div className="header">
+        <input ref={(a) => this._inputElement = a} placeholder="Add an item.."></input>
+        <button onClick={(e) => this.addItem(e)}>add</button>
+        <button onClick={(e) => this.searchItem(e)}>search</button>
+    </div>
       <div className="header1">
           <select value={this.state.value} onChange={this.handleChange}>
             <option value="relevance">Relevance</option>
@@ -178,8 +178,8 @@ saveItem(e) {
           </label>
       </div>
       <SplitPane split="vertical" defaultSize={500}>
-        <SplitPane split="horizontal" defaultSize={500}>
-          <div className="leftDiv">
+        <SplitPane split="horizontal" defaultSize={170}>
+          <div className="shoppingleftDiv">
             <h2 style={{color:"#FFF"}}>Shopping List</h2>
             <CheckList entries={this.state.items} delete={this.deleteItem}
             handleCheckbox={this.handleCheckboxChange}></CheckList>
@@ -191,7 +191,7 @@ saveItem(e) {
         <div className="shoppingRightDiv">
           <div style={{color:"#FFF"}}><h2>Walmart Search</h2></div>
           {this.state.isSearch ? (
-            <div style={{margin:"10%"}}>
+            <div>
             <SearchResults entries={this.state.shoppingitems}/>
             </div>
           ) : <div></div>}

@@ -1,29 +1,56 @@
 import React, { Component } from "react";
-import GuestsList from "./GuestsList";
+import CheckList from "../common/CheckList";
 import "../shoppingList/ShoppingList.css";
 import Alert from "react-s-alert";
 import {sendInvite} from "../util/APIUtils"
 import Sidebar from "../event/Sidebar";
 import SplitPane from "react-split-pane";
+import { getEventDetails, updateEventDetails } from "../util/APIUtils";
+import Bottombar from "../common/bottombar"
 
 class InviteGuests extends Component{
   constructor(props) {
   super(props);
   this.state = {
-  items: [],
-  isSaved: false,
-  emailContent: '',
-  emailSubject: '',
-};
+    items: [],
+    isSaved: false,
+    emailContent: '',
+    emailSubject: '',
+    emailVenue: '',
+    emailDate: '',
+    event: {},
+  };
   this.addItem = this.addItem.bind(this);
   this.deleteItem = this.deleteItem.bind(this);
+  this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
+
+}
+
+componentWillMount() {
+
+  var event = {};
+  event["eventId"] = this.props.match.params.eventId;
+
+  getEventDetails(event).then(response =>
+  {
+      var list = response.invitationList;
+      var guestList = [];
+
+      Object.entries(list).map(([id,value])=>{
+        guestList.push({text: id, key: id, isChecked: value})
+      })
+
+      this.setState({event: response, items: guestList, emailVenue: response.venue, emailDate: response.eventdate});
+    }
+  )
 }
 
 addItem(e) {
   if (this._inputElement.value !== "") {
     var newItem = {
       text: this._inputElement.value,
-      key: Date.now()
+      key: this._inputElement.value,
+      isChecked: false
     };
 
     this.setState((prevState) => {
@@ -45,31 +72,64 @@ deleteItem(key) {
     items: filteredItems
   });
 }
-saveItem(e) {
-  Alert.success("Shopping List saved successfully");
-  this.setState({
-    isSaved: true
+
+handleCheckboxChange(key){
+  var filteredItems = this.state.items.filter(function (item) {
+    if(item.key == key){
+      item.isChecked = !item.isChecked;
+    }
+    return true;
   });
 
+  this.setState({
+    items: filteredItems
+  });
 }
+
+saveItem(e) {
+  var newEvent = this.state.event;
+  var list = this.state.items;
+
+  var newGuestList = {}
+  list.map((l) => {
+    newGuestList[l.text] = l.isChecked
+  });
+  newEvent["invitationList"] = newGuestList;
+
+  this.setState({
+    isSaved: true,
+  });
+  console.log('saving... :: ' + JSON.stringify(newEvent));
+  updateEventDetails(newEvent).then(response =>
+    {Alert.success("Invitation List saved successfully");}
+  )
+  .catch(error => {
+    Alert.error("Invitation List not updated!!!");
+  });
+}
+
 sendInvite(e) {
-  console.log("sendInvite called ");
        var email = {};
        var list = this.state.items;
        var emailList = [];
-       list.map((l) => emailList.push(l.text));
+       list.map((l) => {
+        if(l.isChecked)
+          emailList.push(l.text)
+       });
        email["emailId"] = emailList;
        email["emailContent"] = this.state.emailContent;
        email["emailSubject"] = this.state.emailSubject;
-
-       console.log(email);
+       email["emailVenue"] = this.state.emailVenue;
+       email["emailDate"] = this.state.emailDate;
       sendInvite(email)
         .then(response => {
-          console.log(JSON.stringify(response));
-        })
-        .catch(error => {
           Alert.success(
               "Email Sent successfully"
+          );
+        })
+        .catch(error => {
+          Alert.error(
+              "Email Sending Error"
           );
         });
   }
@@ -89,10 +149,7 @@ sendInvite(e) {
   }
   render() {
     return (
-      <div className="rootDiv">
-      <div className="sidebarDiv">
-       <Sidebar/>
-      </div>
+      <div style={{height:"900px"}}>
       <div className="childitemDiv">
       <div className="shoppingListMain">
         <div className="header2">
@@ -102,10 +159,11 @@ sendInvite(e) {
             <button type="submit">add</button>
           </form>
         </div>
-        <SplitPane split="vertical" defaultSize={750}>
+        <div>
+          <SplitPane split="vertical" defaultSize={500}>
           <div className="leftDiv">
-          <GuestsList entries={this.state.items}
-          delete={this.deleteItem}/>
+          <CheckList entries={this.state.items}
+          delete={this.deleteItem} handleCheckbox={this.handleCheckboxChange}/>
           <div className="header">
            <button onClick={(e) => this.saveItem(e)}>Save</button>
            <button onClick={(e) => this.sendInvite(e)}>Send Invite</button>
@@ -127,7 +185,11 @@ sendInvite(e) {
             <textarea style={{height:"200px"}} placeholder="You are invited!" onChange={this.handleChange} />
           </div>
         </div>
-        </SplitPane>
+      </SplitPane>
+      </div>
+      </div>
+      <div className="bottomDiv">
+        <Bottombar eventId={this.props.match.params.eventId}/>
       </div>
       </div>
       </div>

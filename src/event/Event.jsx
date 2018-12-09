@@ -43,6 +43,7 @@ class Event extends Component {
 
     this.props.createMyEvent(eventRequest);
     Alert.success("Event created successfully!");
+    event.target.reset();
   };
 
   handleDateChange(day) {

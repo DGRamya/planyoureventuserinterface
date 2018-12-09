@@ -11,19 +11,20 @@ import NotFound from "../common/NotFound";
 import LoadingIndicator from "../common/LoadingIndicator";
 import ShoppingList from "../shoppingList/ShoppingList";
 import InviteGuests from "../inviteGuests/InviteGuests";
+import TodoList from "../todo/TodoList";
 import { getCurrentUser } from "../util/APIUtils";
 import { ACCESS_TOKEN } from "../constants";
 import PrivateRoute from "../common/PrivateRoute";
 import Event from "../event/Event";
 import EventDetails from "../event/EventDetails";
 import Sidebar from "../event/Sidebar";
+import MultipleOrganizer from "../addOrganizer/MultipleOrganizer";
 
 import Alert from "react-s-alert";
 import "react-s-alert/dist/s-alert-default.css";
 import "react-s-alert/dist/s-alert-css-effects/slide.css";
 import "./App.css";
 import MyEvents from "../event/MyEvents";
-
 
 //redux changes
 import { Provider } from "react-redux";
@@ -81,7 +82,6 @@ class App extends Component {
       return <LoadingIndicator />;
     }
 
-
     return (
     <Provider store={store}>
       <div className="app" style={{backgroundImage: 'url(' + require('../img/b3.png') + ')'}}>
@@ -91,51 +91,63 @@ class App extends Component {
             onLogout={this.handleLogout}
           />
         </div>
-        <div className="app-body">
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <PrivateRoute
-              path="/profile"
-              authenticated={this.state.authenticated}
-              currentUser={this.state.currentUser}
-              component={Profile}
-            />
 
-            <PrivateRoute
-              path="/event"
-              authenticated={this.state.authenticated}
-              currentUser={this.state.currentUser}
-              component={Event}
-            />
-
-            <PrivateRoute
-              path="/myevents"
-              authenticated={this.state.authenticated}
-              currentUser={this.state.currentUser}
-              component={MyEvents}
-            />
+          <div className="app-body">
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <PrivateRoute
+                path="/profile"
+                authenticated={this.state.authenticated}
+                currentUser={this.state.currentUser}
+                component={Profile}
+              />
 
               <PrivateRoute
-               path="/shoppingList"
-               authenticated={this.state.authenticated}
-               currentUser={this.state.currentUser}
-               component={ShoppingList}
-             />
+                path="/event"
+                authenticated={this.state.authenticated}
+                currentUser={this.state.currentUser}
+                component={Event}
+              />
 
-             <PrivateRoute
-              path="/inviteGuests"
+              <PrivateRoute
+                path="/myevents"
+                authenticated={this.state.authenticated}
+                currentUser={this.state.currentUser}
+                component={MyEvents}
+              />
+
+              <PrivateRoute
+                path="/shoppingList/:eventId"
+                authenticated={this.state.authenticated}
+                currentUser={this.state.currentUser}
+                component={ShoppingList}
+              />
+
+              <PrivateRoute
+                path="/eventdetails/:eventId"
+                authenticated={this.state.authenticated}
+                currentUser={this.state.currentUser}
+                component={EventDetails}
+              />
+
+            <PrivateRoute
+              path="/todoList/:eventId"
               authenticated={this.state.authenticated}
               currentUser={this.state.currentUser}
-              component={InviteGuests}
+              component={TodoList}
             />
-
-
-           <PrivateRoute
-              path="/eventdetails/:eventId"
-              authenticated={this.state.authenticated}
-              currentUser={this.state.currentUser}
-              component={EventDetails}
-            />
+              <PrivateRoute
+                path="/inviteGuests/:eventId"
+                authenticated={this.state.authenticated}
+                currentUser={this.state.currentUser}
+                component={InviteGuests}
+              />
+              <PrivateRoute
+                path="/multipleOrganizer/:eventId"
+                authenticated={this.state.authenticated}
+                currentUser={this.state.currentUser}
+                component={MultipleOrganizer}
+              />
 
             <Route
               exact
@@ -157,14 +169,14 @@ class App extends Component {
           </Switch>
         </div>
         <Alert
-          stack={{ limit: 3 }}
-          timeout={3000}
-          position="top-right"
-          effect="slide"
-          offset={65}
-        />
-      </div>
-    </Provider>
+            stack={{ limit: 3 }}
+            timeout={3000}
+            position="top-right"
+            effect="slide"
+            offset={65}
+          />
+        </div>
+      </Provider>
     );
   }
 }

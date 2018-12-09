@@ -155,12 +155,28 @@ button {
   font-size: 1rem;
   border: 1% solid #FFF;
   width: 15%;
-  margin-left: 10%;
+  margin-left: 35%;
+  margin-top: 5%;
+}
+
+.shoppingListMain .header2 button {
+  padding: 1%;
+  font-size: 1rem;
+  margin: 1%;
+  background-color: #2F363A;
+  color: #FFF;
+  border: 2px solid #2F363A;
+  width: 15%;
 }
 
 .bottomDiv {
-  margin-top: 32%;
+  margin-top: 30%;
   height: 10%;
   width: 100%;
   background-color: #1863a0;
+}
+
+.header {
+  max-width: 100%;
+  margin: auto;
 }

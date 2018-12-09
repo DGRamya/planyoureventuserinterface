@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ShoppingListItems from "./ShoppingListItems";
 import Bottombar from "../common/bottombar";
+import CheckList from "../common/CheckList";
 import "./ShoppingList.css";
 import SplitPane from "react-split-pane";
 import {getShoppingSearch} from "../util/APIUtils"
@@ -10,7 +11,7 @@ import SearchResults from "./SearchResult";
 import Sidebar from "../event/Sidebar";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import  { getMyEventDetails } from "../appActions/eventsActions";
+import { getEventDetails, updateEventDetails } from "../util/APIUtils";
 
 
 class ShoppingList extends Component{
@@ -21,14 +22,32 @@ class ShoppingList extends Component{
   shoppingitems: [{},{},{},{},{}],
   isSearch: false,
   value: "Relevance",
-  numItems: 10
+  numItems: 10,
+  event: {}
 };
   this.addItem = this.addItem.bind(this);
   this.deleteItem = this.deleteItem.bind(this);
   this.handleChange = this.handleChange.bind(this);
   this.handleInputChange = this.handleInputChange.bind(this);
+  this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
+
 }
 
+componentWillMount() {
+  var event = {};
+  event["eventId"] = this.props.match.params.eventId;
+  console.log("this.props.match.params :: " + JSON.stringify(event));
+  getEventDetails(event).then(response =>
+  {
+      var list = response.shoppingList;
+      var shopList = [];
+      Object.entries(list).map(([id,value])=>{
+        shopList.push({text: id, key: id, isChecked: value})
+      })
+
+      this.setState({event: response, items: shopList});}
+  );
+}
 handleChange(event) {
     this.setState({value: event.target.value});
     console.log("drop down seleted", this.state.value);
@@ -48,7 +67,8 @@ addItem(e) {
   if (this._inputElement.value !== "") {
     var newItem = {
       text: this._inputElement.value,
-      key: Date.now()
+      key: this._inputElement.value,
+      isChecked: false
     };
 
     this.setState((prevState) => {
@@ -93,12 +113,41 @@ searchItem(e) {
     });
 
 }
-saveItem(e) {
-  Alert.success("Shopping List saved successfully");
-  this.setState({
-    isSaved: true
+
+handleCheckboxChange(key){
+  var filteredItems = this.state.items.filter(function (item) {
+    if(item.key == key){
+      item.isChecked = !item.isChecked;
+    }
+    return true;
   });
 
+  this.setState({
+    items: filteredItems
+  });
+}
+
+saveItem(e) {
+  var newEvent = this.state.event;
+
+  var list = this.state.items;
+  var shopList = {};
+  list.map((l) => {
+    shopList[l.text] = l.isChecked
+  });
+  newEvent["shoppingList"] = shopList;
+
+  this.setState({
+    isSaved: true,
+  });
+
+  console.log("newEvent :: "+JSON.stringify(newEvent));
+  updateEventDetails(newEvent).then(response =>
+    {Alert.success("Shopping List saved successfully");}
+  )
+  .catch(error => {
+    Alert.error("Shopping List not updated!!!");
+  });
 }
 
   render() {
@@ -132,7 +181,8 @@ saveItem(e) {
         <SplitPane split="horizontal" defaultSize={500}>
           <div className="leftDiv">
             <h2 style={{color:"#FFF"}}>Shopping List</h2>
-            <ShoppingListItems entries={this.state.items} delete={this.deleteItem}></ShoppingListItems>
+            <CheckList entries={this.state.items} delete={this.deleteItem}
+            handleCheckbox={this.handleCheckboxChange}></CheckList>
           </div>
           <div style={{width:"200px", margin:"50%"}}>
             <button onClick={(e) => this.saveItem(e)}>Save</button>
@@ -150,7 +200,7 @@ saveItem(e) {
       </SplitPane>
     </div>
     <div className="bottomDiv">
-      <Bottombar />
+      <Bottombar eventId={this.props.match.params.eventId}/>
     </div>
     </div>
 

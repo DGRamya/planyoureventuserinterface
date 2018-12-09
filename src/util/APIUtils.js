@@ -74,12 +74,11 @@ export function getShoppingSearch(item) {
     url: API_BASE_URL + "/events/myevents/shopping/search",
     method: "POST",
     body: JSON.stringify(item)
-
   });
 }
 
 export function sendInvite(guestList) {
-  console.log('in apiutils..');
+  console.log("in apiutils..");
   return request({
     url: API_BASE_URL + "/invites/sendmail",
     method: "POST",
@@ -87,12 +86,29 @@ export function sendInvite(guestList) {
   });
 }
 
-export function getEventDetails(detailsRequest){
+export function addOrganizer(guestList) {
+  console.log("in apiutils..");
+  return request({
+    url: API_BASE_URL + "/events/myevents/addOrganizer",
+    method: "POST",
+    body: JSON.stringify(guestList)
+  });
+}
+
+export function getEventDetails(detailsRequest) {
   console.log(" detailsRequest :: " + JSON.stringify(detailsRequest));
   return request({
     url: API_BASE_URL + "/events/myevents/eventdetails",
     method: "POST",
     body: JSON.stringify(detailsRequest)
+  });
+}
+
+export function updateEventDetails(eventRequest) {
+  return request({
+    url: API_BASE_URL + "/events/myevents/update",
+    method: "POST",
+    body: JSON.stringify(eventRequest)
   });
 }
 
@@ -103,5 +119,4 @@ export function deleteEvent(deleteRequest) {
     method: "POST",
     body: JSON.stringify(deleteRequest)
   });
-  
 }

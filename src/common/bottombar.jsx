@@ -11,19 +11,19 @@ class Bottombar extends Component {
             <nav className="app-nav">
                 <ul>
                   <li>
-                    <NavLink to="/eventdetails">Event Details</NavLink>
+                    <NavLink to={"/eventdetails/"+this.props.eventId}>Event Details</NavLink>
                   </li>
                   <li>
-                    <NavLink to="/shoppinglist">Shopping List</NavLink>
+                    <NavLink to={"/shoppinglist/"+this.props.eventId}>Shopping List</NavLink>
                   </li>
                   <li>
-                    <NavLink to="/inviteGuests">Invitations</NavLink>
+                    <NavLink to={"/inviteGuests/"+this.props.eventId}>Invitations</NavLink>
                   </li>
                   <li>
-                    <NavLink to="/todoList">To Do</NavLink>
+                    <NavLink to={"/todoList/"+this.props.eventId}>To Do</NavLink>
                   </li>
                   <li>
-                    <NavLink to="/multipleOrganizer">Add Organizer</NavLink>
+                    <NavLink to={"/multipleOrganizer/"+this.props.eventId}>Add Organizer</NavLink>
                   </li>
                 </ul>
             </nav>

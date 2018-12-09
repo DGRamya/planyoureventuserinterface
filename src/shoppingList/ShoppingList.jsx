@@ -27,6 +27,8 @@ class ShoppingList extends Component{
   this.deleteItem = this.deleteItem.bind(this);
   this.handleChange = this.handleChange.bind(this);
   this.handleInputChange = this.handleInputChange.bind(this);
+  this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
+
 }
 
 componentWillMount() {
@@ -37,8 +39,9 @@ componentWillMount() {
   {
       var list = response.shoppingList;
       var shopList = [];
-      list.map((l) => shopList.push({text: l,
-                                     key: Date.now()}));
+      Object.entries(list).map(([id,value])=>{
+        shopList.push({text: id, key: id, isChecked: value})
+      })
 
       this.setState({event: response, items: shopList});}
   );
@@ -62,7 +65,8 @@ addItem(e) {
   if (this._inputElement.value !== "") {
     var newItem = {
       text: this._inputElement.value,
-      key: Date.now()
+      key: this._inputElement.value,
+      isChecked: false
     };
 
     this.setState((prevState) => {
@@ -126,9 +130,10 @@ saveItem(e) {
   var newEvent = this.state.event;
 
   var list = this.state.items;
-  var shopList = [];
-  list.map((l) => shopList.push(l.text));
-
+  var shopList = {};
+  list.map((l) => {
+    shopList[l.text] = l.isChecked
+  });
   newEvent["shoppingList"] = shopList;
 
   this.setState({

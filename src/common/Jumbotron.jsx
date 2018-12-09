@@ -61,7 +61,7 @@ class Jumbotron extends Component {
         {this.props.displayState == "true" ? (
           <div className="deleteIcon">
             <button name="delete" onClick={this.handleDelete} style={{width: "20px" }}>
-            -
+            x
             </button>
           </div>
         ) : null}

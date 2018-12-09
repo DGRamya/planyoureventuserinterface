@@ -16,6 +16,10 @@
     padding: 35px;
 }
 
+.container h1 {
+  color: #FFF;
+}
+
 .nestedContainer {
   display: flex;
   flex-direction: column;

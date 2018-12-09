@@ -21,14 +21,22 @@ class EventDetails extends Component {
                  <Sidebar eventId={this.props.event.eventid}/>
               </div>
               <div className="eventDetailcontainer">
-                  <div><h2>General Information</h2></div><br /><br />
-                  Event Name :
-                  &nbsp;<input type="text" value={this.props.event.eventname} style={{width: "300px", height: "50px"}}/> <br /><br /><br /><br />
-                  Event Venue :
-                  &nbsp;<input type="text" value={this.props.event.venue} style={{width: "300px", height: "50px"}}/> <br /><br /><br /><br />
-                  Event Date :
-                  &nbsp;<input type="text" value={this.props.event.eventdate} style={{width: "300px", height: "50px"}}/> <br /><br /><br /><br />
-                  {/* Description : {event.description} <br /><br /> <br /><br /> */}
+                  <div className="header"><h2>General Information</h2></div>
+                  <div>
+                  <label> Event Name :
+                  <input type="text" value={this.props.event.eventname} style={{width: "300px", height: "50px"}}/>
+                  </label>
+                  </div>
+                  <div>
+                  <label>Event Venue :
+                  <input type="text" value={this.props.event.venue} style={{width: "300px", height: "50px"}}/>
+                  </label>
+                  </div>
+                  <div className="input1">
+                  <label>Event Date :
+                  <input type="text" value={this.props.event.eventdate} style={{width: "300px", height: "50px"}}/>
+                  </label>
+                  </div>
                   <button type="submit" style={{width: "100px", height: "50px"}}>
                     Save
                   </button>

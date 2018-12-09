@@ -3,6 +3,7 @@
     position: relative;
     z-index: 10;
     color: "#2F363A";
+    background-color: transparent;
 }
 
 .app-title {

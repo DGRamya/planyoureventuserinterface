@@ -1,9 +1,9 @@
 
-.shoppingcontaine {
+.shoppingcontainer {
     background-color: transparent;
     box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
     border-radius: 2px;
-    width: 500px;
+    width: 100%;
     display: inline-block;
     margin-top: 30px;
     vertical-align: middle;
@@ -15,13 +15,21 @@
   display: inline-block;
   align-content: center;
   width: 30%;
+  margin-top: 0%;
+  background-color: transparent;
+  box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
+}
+
+.shoppingRightDiv {
+  margin-left: 30%;
 }
 
 .childitemDiv {
   display: inline-block;
   align-content: center;
   justify-content: left;
-  width: 70%;
+  width: 100%;
+  margin-top: 0%;
 }
 
 .shoppingListMain .header input {
@@ -29,7 +37,7 @@
   font-size: 1rem;
   border: 1% solid #FFF;
   width: 15%;
-  margin-left: 30%;
+  margin-left: 25%;
 }
 .shoppingListMain .header button {
   padding: 1%;
@@ -44,7 +52,7 @@
   padding: 1%;
   font-size: 1rem;
   border: 1% solid #FFF;
-  width: 15%;
+  width: 10%;
   margin-left: 1%;
 }
 
@@ -53,14 +61,15 @@
   font-size: 1rem;
   border: 1% solid #FFF;
   width: 15%;
-  margin-left: 31%;
+  height: 50%;
+  margin-left: 30%;
 }
 .shoppingListMain .header1 label {
   padding: 1%;
-  font-size: 1rem;
+  font-size: 1.2rem;
   border: 1% solid #FFF;
   width: 15%;
-  color: #333;
+  color: #FFF;
   margin-left: 2%;
 }
 .shoppingListMain .header button:hover {
@@ -147,4 +156,11 @@ button {
   border: 1% solid #FFF;
   width: 15%;
   margin-left: 10%;
+}
+
+.bottomDiv {
+  margin-top: 32%;
+  height: 10%;
+  width: 100%;
+  background-color: #1863a0;
 }

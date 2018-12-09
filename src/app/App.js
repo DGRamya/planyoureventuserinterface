@@ -84,7 +84,7 @@ class App extends Component {
 
     return (
     <Provider store={store}>
-      <div className="app" style={{backgroundImage: 'url(' + require('../img/background3.jpg') + ')'}}>
+      <div className="app" style={{backgroundImage: 'url(' + require('../img/b3.png') + ')'}}>
         <div className="app-top-box">
           <AppHeader
             authenticated={this.state.authenticated}

@@ -5,7 +5,7 @@ class Home extends Component {
   render() {
     return (
       <div className="home-container">
-        <div className="container">
+        <div className="hmcontainer">
           <div className="graf-bg-container">
             <div className="graf-layout">
               <div className="graf-circle" />
@@ -21,7 +21,7 @@ class Home extends Component {
               <div className="graf-circle" />
             </div>
           </div>
-          <h1 className="home-title">Planning Made Easy!!</h1>
+          <h1 className="home-title">Event Planning Made Easy!!</h1>
         </div>
       </div>
     );

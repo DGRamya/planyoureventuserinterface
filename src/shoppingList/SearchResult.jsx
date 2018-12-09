@@ -20,17 +20,18 @@ class SearchResults extends Component{
   render() {
     return (
       <div>
-      <SplitPane split="horizontal" defaultSize={550}>
       <div>
         {this.props.entries.map((entry, index) =>
-        index < 8 ?
+        index < 4 ?
         <div className="thumbnail">
           <a href={entry.productUrl} target="_blank">
             <img src={entry["thumbnailImage"]}/>
           </a>
             <div className="caption">
               <h3>{entry["name"]}</h3>
-              <p>{entry["salePrice"]}</p>
+            </div>
+            <div className="price">
+              <h3>{entry["salePrice"]}</h3>
             </div>
         </div> : <div></div>
         )}
@@ -39,7 +40,6 @@ class SearchResults extends Component{
     <div className="header">
       <button onClick={this.togglePopup.bind(this)}>Show More</button>
     </div>
-    </SplitPane>
     {this.state.showPopup ?
           <Popup
             entries={this.props.entries}

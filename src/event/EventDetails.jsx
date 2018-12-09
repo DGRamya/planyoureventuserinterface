@@ -7,6 +7,7 @@ import  { getMyEventDetails } from "../appActions/eventsActions";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import "./EventDetails.css";
+import Bottombar from "../common/bottombar"
 
 class EventDetails extends Component {
 
@@ -17,17 +18,29 @@ class EventDetails extends Component {
     render() {
         return (
           <div className="root">
-              <div>
-                 <Sidebar eventId={this.props.event.eventid}/>
+              <div className="eventDetailcontainer">
+                  <div className="header"><h2>General Information</h2></div>
+                  <div>
+                  <label> Event Name :
+                  <input type="text" value={this.props.event.eventname} style={{width: "300px", height: "50px", fontSize:"20px"}}/>
+                  </label>
+                  </div>
+                  <div>
+                  <label>Event Venue :
+                  <input type="text" value={this.props.event.venue} style={{width: "300px", height: "50px", fontSize:"20px"}}/>
+                  </label>
+                  </div>
+                  <div className="input1">
+                  <label>Event Date :
+                  <input type="text" value={this.props.event.eventdate} style={{width: "300px", height: "50px", fontSize:"20px"}}/>
+                  </label>
+                  </div>
+                  <button type="submit" style={{width: "100px", height: "50px"}}>
+                    Save
+                  </button>
               </div>
-              <div className="childitem">
-                  Event Name :
-                  &nbsp;<input type="text" value={this.props.event.eventname} style={{width: "200px", height: "30px"}}/> <br /><br />
-                  Event Venue :
-                  &nbsp;<input type="text" value={this.props.event.venue} style={{width: "200px", height: "30px"}}/> <br /><br />
-                  Event Date :
-                  &nbsp;<input type="text" value={this.props.event.eventdate} style={{width: "200px", height: "30px"}}/> <br /><br />
-                  {/* Description : {event.description} <br /><br /> <br /><br /> */}
+              <div className="bottomDiv">
+                <Bottombar eventId={this.props.match.params.eventId}/>
               </div>
           </div>
         );

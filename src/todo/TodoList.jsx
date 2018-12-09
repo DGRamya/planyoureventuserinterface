@@ -5,6 +5,7 @@ import Alert from "react-s-alert";
 import Sidebar from "../event/Sidebar";
 import SplitPane from "react-split-pane";
 import { getEventDetails, updateEventDetails } from "../util/APIUtils";
+import Bottombar from "../common/bottombar"
 
 class TodoList extends Component{
 
@@ -13,29 +14,28 @@ class TodoList extends Component{
         this.state = {
           items: [],
           isSaved: false,
-          event: {},
-          todoList: [],
+          event: {}
         };
         this.addItem = this.addItem.bind(this);
         this.deleteItem = this.deleteItem.bind(this);
         this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
-      
+
     }
 
     componentWillMount() {
         var event = {};
         event["eventId"] = this.props.match.params.eventId;
-      
+
         getEventDetails(event).then(response =>
         {
             var list = response.todoList;
             var todoList = [];
-      
+            console.log("todo list "+JSON.stringify(response));
             Object.entries(list).map(([id,value])=>{
                 todoList.push({text: id, key: id, isChecked: value})
             })
-      
-            this.setState({event: response, items: todoList, todoList:todoList});
+
+            this.setState({event: response, items: todoList});
         })
     }
 
@@ -46,7 +46,7 @@ class TodoList extends Component{
             key: this._inputElement.value,
             isChecked: false
           };
-      
+
           this.setState((prevState) => {
             return {
               items: prevState.items.concat(newItem)
@@ -61,7 +61,7 @@ class TodoList extends Component{
         var filteredItems = this.state.items.filter(function (item) {
           return (item.key !== key);
         });
-      
+
         this.setState({
           items: filteredItems
         });
@@ -74,7 +74,7 @@ class TodoList extends Component{
           }
           return true;
         });
-      
+
         this.setState({
           items: filteredItems
         });
@@ -83,20 +83,18 @@ class TodoList extends Component{
     saveItem(e) {
         var newEvent = this.state.event;
         var list = this.state.items;
-      
-        var todoList = [];
+
         var newTodoList = {}
         list.map((l) => {
             newTodoList[l.text] = l.isChecked
-            todoList.push(l.text)
         });
-        
-        newEvent["todolist"] = newTodoList;
-      
+
+        newEvent["todoList"] = newTodoList;
+
         this.setState({
           isSaved: true,
         });
-        
+
         updateEventDetails(newEvent).then(response =>
           {Alert.success("ToDo List saved successfully");}
         )
@@ -107,10 +105,7 @@ class TodoList extends Component{
 
     render() {
         return (
-          <div className="rootDiv">
-          <div className="sidebarDiv">
-           <Sidebar eventId={this.props.match.params.eventId}/>
-          </div>
+          <div style={{height:"900px"}}>
           <div className="childitemDiv">
           <div className="shoppingListMain">
             <div className="header2">
@@ -120,16 +115,19 @@ class TodoList extends Component{
                 <button type="submit">add</button>
               </form>
             </div>
-            <SplitPane split="vertical" defaultSize={750}>
-              <div className="leftDiv">
+
+              <div className="list">
               <CheckList entries={this.state.items}
-                         delete={this.deleteItem} 
+                         delete={this.deleteItem}
                          handleCheckbox={this.handleCheckboxChange}/>
-              <div className="header">
+              </div>
+              <div className="center">
                <button onClick={(e) => this.saveItem(e)}>Save</button>
+
               </div>
-              </div>
-            </SplitPane>
+          </div>
+          <div className="bottomDiv">
+            <Bottombar eventId={this.props.match.params.eventId}/>
           </div>
           </div>
           </div>

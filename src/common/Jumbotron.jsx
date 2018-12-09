@@ -10,6 +10,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { deleteMyEvent } from "../appActions/eventsActions";
 import EventDetails from "../event/EventDetails";
+import image1 from "../img/jb3.jpg";
+import image2 from "../img/jb1.jpg";
 
 class Jumbotron extends Component {
   constructor(props) {
@@ -38,20 +40,28 @@ class Jumbotron extends Component {
     return (
       <div className="jumbotron">
         <div>
+          {this.props.image == "true" ? (
+          <a href={"/eventdetails/"+this.props.eventId}>
           <img
-            src={this.props.image}
-            style={{ maxHeight: "40%", width: "70%" }}
-          />
+            src={image1}
+            style={{ maxHeight: "30%", width: "100%" }}/>
+          </a>
+          ) : (
+            <a href={"/eventdetails/"+this.props.eventId}>
+            <img
+            src={image2}
+            style={{ maxHeight: "30%", width: "100%" }}/>
+            </a>
+        )
+        }
         </div>
-        <h1>{this.props.mainText}</h1>
+        <h1 className="header">{this.props.mainText}</h1>
         <p>{this.props.subText}</p>
-        <PrimaryButton
-          buttonText="Learn more"
-          buttonLink={"/eventdetails/"+this.props.eventId}
-        />
         {this.props.displayState == "true" ? (
           <div className="deleteIcon">
-            <button name="delete" onClick={this.handleDelete} />
+            <button name="delete" onClick={this.handleDelete} style={{width: "20px" }}>
+            x
+            </button>
           </div>
         ) : null}
       </div>

@@ -83,19 +83,15 @@ class App extends Component {
     }
 
     return (
-      <Provider store={store}>
-        <div
-          className="app"
-          style={{
-            backgroundImage: "url(" + require("../img/background3.jpg") + ")"
-          }}
-        >
-          <div className="app-top-box">
-            <AppHeader
-              authenticated={this.state.authenticated}
-              onLogout={this.handleLogout}
-            />
-          </div>
+    <Provider store={store}>
+      <div className="app" style={{backgroundImage: 'url(' + require('../img/b3.png') + ')'}}>
+        <div className="app-top-box">
+          <AppHeader
+            authenticated={this.state.authenticated}
+            onLogout={this.handleLogout}
+          />
+        </div>
+
           <div className="app-body">
             <Switch>
               <Route exact path="/" component={Home} />
@@ -127,6 +123,13 @@ class App extends Component {
                 component={ShoppingList}
               />
 
+              <PrivateRoute
+                path="/eventdetails/:eventId"
+                authenticated={this.state.authenticated}
+                currentUser={this.state.currentUser}
+                component={EventDetails}
+              />
+
             <PrivateRoute
               path="/todoList/:eventId"
               authenticated={this.state.authenticated}
@@ -146,42 +149,26 @@ class App extends Component {
                 component={MultipleOrganizer}
               />
 
-              <PrivateRoute
-                path="/eventdetails/:eventId"
-                authenticated={this.state.authenticated}
-                currentUser={this.state.currentUser}
-                component={EventDetails}
-              />
+            <Route
+              exact
+              path="/login"
+              render={props => (
+                <Login authenticated={this.state.authenticated} {...props} />
+              )}
+            />
 
-              {/* <PrivateRoute
-              path="/shoppinglist/:list"
-              authenticated={this.state.authenticated}
-              currentUser={this.state.currentUser}
-              component={ShoppingList}
-            />  */}
+            <Route
+              path="/signup"
+              render={props => (
+                <Signup authenticated={this.state.authenticated} {...props} />
+              )}
+            />
+            <Route path="/oauth2/redirect" component={OAuth2RedirectHandler} />
+            <Route component={NotFound} />
 
-              <Route
-                exact
-                path="/login"
-                render={props => (
-                  <Login authenticated={this.state.authenticated} {...props} />
-                )}
-              />
-
-              <Route
-                path="/signup"
-                render={props => (
-                  <Signup authenticated={this.state.authenticated} {...props} />
-                )}
-              />
-              <Route
-                path="/oauth2/redirect"
-                component={OAuth2RedirectHandler}
-              />
-              <Route component={NotFound} />
-            </Switch>
-          </div>
-          <Alert
+          </Switch>
+        </div>
+        <Alert
             stack={{ limit: 3 }}
             timeout={3000}
             position="top-right"

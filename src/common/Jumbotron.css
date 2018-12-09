@@ -1,23 +1,29 @@
 .jumbotron{
-  width: 25%; height: 50%; float: left; margin-right: 5%; margin-left: 7%; margin-top: 5%; margin-bottom:5%;color:inherit;background-color:#eee
+  width: 20%;
+  height: 45%;
+  float: left;
+  margin-left: 5%;
+  margin-top: 2%;
+  margin-bottom:5%;
+  color:inherit;
+  background-color:#FFF;
+  box-shadow: 0 2px 11px rgba(0, 0, 0, 0.30);
+  border-radius: 2px;
 }
-.jumbotron .jumboButton{
-  white-space: normal;
-  width: 70%;
-  margin-left: 15%;
-  margin-right: 15%;
-  white-space: normal;
-  padding-left: 5%;
-  padding-right: 5%;
-}
-.jumbotron .h1,.jumbotron h1{
+
+.jumbotron h1{
   color:inherit;
   margin-right:2%;
   margin-left: 5%;
   white-space: normal;
+  font-size:2rem;
 }
 .jumbotron p{
-  margin-bottom:5%;font-size:2rem;font-weight:200;margin-left: 15%;  align-items: center;
+  margin-bottom:3%;
+  font-size:2rem;
+  font-weight:200;
+  margin-left: 15%;
+  align-items: center;
 }
 .jumbotron>hr{
   border-top-color:#d5d5d5
@@ -38,20 +44,17 @@
     padding-top:3%;padding-bottom:3%
   }
 .container .jumbotron,.container-fluid .jumbotron{
-  padding-right:5%;padding-left:5%
+  padding-right:3%;padding-left:3%
 }
 .jumbotron .h1,.jumbotron h1{
-  font-size:4rem
+  font-size:2rem
   }
 }
 
 .btn-lg{
-  padding: .5rem 1rem;
     font-size: 1.25rem;
     line-height: 1.5;
     border-radius: .3rem;
-    width: 70%;
+    width: 50%;
     white-space: normal;
-    padding-left: 5%;
-    padding-right: 5%;
 }

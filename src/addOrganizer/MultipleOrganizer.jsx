@@ -6,6 +6,7 @@ import { addOrganizer } from "../util/APIUtils";
 import Sidebar from "../event/Sidebar";
 import SplitPane from "react-split-pane";
 import { getEventDetails, updateEventDetails } from "../util/APIUtils";
+import Bottombar from "../common/bottombar"
 
 class MultipleOrganizer extends Component {
   constructor(props) {
@@ -35,7 +36,6 @@ class MultipleOrganizer extends Component {
 
       this.setState({
         event: response,
-        items: guestList,
         emailVenue: response.venue,
         emailDate: response.eventdate
       });
@@ -115,10 +115,7 @@ class MultipleOrganizer extends Component {
   };
   render() {
     return (
-      <div className="rootDiv">
-        <div className="sidebarDiv">
-          <Sidebar eventId={this.props.match.params.eventId} />
-        </div>
+      <div style={{height:"900px"}}>
         <div className="childitemDiv">
           <div className="shoppingListMain">
             <div className="header2">
@@ -132,7 +129,7 @@ class MultipleOrganizer extends Component {
               </form>
             </div>
 
-            <div className="leftDiv">
+            <div className="list">
               <CheckList
                 entries={this.state.items}
                 delete={this.deleteItem}
@@ -140,11 +137,14 @@ class MultipleOrganizer extends Component {
               />
             </div>
 
-            <div className="header">
+            <div className="center">
               <button onClick={e => this.multipleOrganizer(e)}>
-                Send Invite
+                Add Organizer
               </button>
             </div>
+          </div>
+          <div className="bottomDiv">
+            <Bottombar eventId={this.props.match.params.eventId}/>
           </div>
         </div>
       </div>

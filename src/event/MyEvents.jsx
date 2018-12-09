@@ -7,6 +7,7 @@ import EventDetails from "./EventDetails";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { fetchEvents } from "../appActions/eventsActions";
+import "./MyEvents.css";
 
 class MyEvents extends Component {
   componentWillMount() {
@@ -15,16 +16,28 @@ class MyEvents extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Events</h1>
+      <div className="MyEventscontainer">
+        <h1 className="title">My Events</h1>
         {this.props.events.map((event, i) => {
+
           return (
+            i % 2 == 0?
             <Jumbotron
               parentMethod={this.props.fetchEvents}
               mainText={event.eventName}
               subText={event.venue}
               displayState="true"
               eventId={event.eventId}
+              image="true"
+            />
+            :
+            <Jumbotron
+              parentMethod={this.props.fetchEvents}
+              mainText={event.eventName}
+              subText={event.venue}
+              displayState="true"
+              eventId={event.eventId}
+              image="false"
             />
           );
         })}

@@ -5,7 +5,7 @@ class PrimaryButton extends React.Component {
     return (
       <div>
          <p><a className="btn btn-primary btn-lg" href={this.props.buttonLink}
-          role="button" style={{backgroundColor:"#F17070", border:"0px", color:"white"}}>
+          role="button" style={{backgroundColor:"#2F363A", border:"0px", color:"white"}}>
           {this.props.buttonText}</a></p>
         </div>
     )

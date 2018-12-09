@@ -3,6 +3,7 @@
     position: relative;
     z-index: 10;
     color: "#2F363A";
+    background-color: transparent;
 }
 
 .app-title {
@@ -13,11 +14,11 @@
 }
 
 .app-branding {
-    float: right;
+    float: left;
 }
 
 .app-options {
-    float: right;
+    float: left;
 }
 
 .app-nav ul {
@@ -37,11 +38,11 @@
     display: inline-block;
     line-height: 60px;
     vertical-align: middle;
-    padding-left: 50px;
-    padding-right: 15px;
+    padding-left: 110px;
+    padding-right: 55px;
     color: #FFF;
 }
 
 .app-nav ul li a:hover {
-    color: #0f96f6;
+    color: black;
 }

@@ -1,9 +1,23 @@
+
+.login-container {
+    text-align: center;
+    height: 900px;
+}
+
 .container {
-  display: inline-flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: flex-start;
-  align-items: center;
+    background-color: transparent;
+    box-shadow: 0 1px 11px rgba(0, 0, 0, 0.27);
+    border-radius: 2px;
+    width: 500px;
+    display: inline-block;
+    margin-top: 30px;
+    vertical-align: middle;
+    position: relative;
+    padding: 35px;
+}
+
+.container h1 {
+  color: #FFF;
 }
 
 .nestedContainer {
@@ -47,4 +61,18 @@
   padding-left: 20px;
   margin-top: 5%;
   font-size: 30px;
+}
+
+.DayPickerInput {
+  width: 100%;
+}
+
+button {
+ padding: 1%;
+ font-size: 1rem;
+ margin: 1%;
+ background-color: #2F363A;
+ color: #FFF;
+ border: 2px solid #2F363A;
+ width: 50%;
 }

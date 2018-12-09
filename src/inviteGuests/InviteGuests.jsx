@@ -6,6 +6,7 @@ import {sendInvite} from "../util/APIUtils"
 import Sidebar from "../event/Sidebar";
 import SplitPane from "react-split-pane";
 import { getEventDetails, updateEventDetails } from "../util/APIUtils";
+import Bottombar from "../common/bottombar"
 
 class InviteGuests extends Component{
   constructor(props) {
@@ -148,10 +149,7 @@ sendInvite(e) {
   }
   render() {
     return (
-      <div className="rootDiv">
-      <div className="sidebarDiv">
-       <Sidebar eventId={this.props.match.params.eventId}/>
-      </div>
+      <div style={{height:"900px"}}>
       <div className="childitemDiv">
       <div className="shoppingListMain">
         <div className="header2">
@@ -161,18 +159,21 @@ sendInvite(e) {
             <button type="submit">add</button>
           </form>
         </div>
-        <SplitPane split="vertical" defaultSize={750}>
+        <div>
+          <SplitPane split="vertical" defaultSize={500}>
           <div className="leftDiv">
           <CheckList entries={this.state.items}
           delete={this.deleteItem} handleCheckbox={this.handleCheckboxChange}/>
           <div className="header">
            <button onClick={(e) => this.saveItem(e)}>Save</button>
-           <button onClick={(e) => this.sendInvite(e)}>Send Invite</button>
+           <button onClick={(e) => this.sendInvite(e)}>Invite</button>
            </div>
            </div>
           <div className="rightDiv">
           <div>
+          <label>
           Send Customized Email Subject:
+          </label>
           </div>
           <div>
             <textarea placeholder="You are invited!" onChange={this.handleSubjectChange}>
@@ -180,13 +181,19 @@ sendInvite(e) {
             {/* </textarea> */}
           </div>
           <div>
+          <label>
           Send Customized Email Content:
+          </label>
           </div>
           <div>
             <textarea style={{height:"200px"}} placeholder="You are invited!" onChange={this.handleChange} />
           </div>
         </div>
-        </SplitPane>
+      </SplitPane>
+      </div>
+      </div>
+      <div className="bottomDiv">
+        <Bottombar eventId={this.props.match.params.eventId}/>
       </div>
       </div>
       </div>
